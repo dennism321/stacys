@@ -135,7 +135,7 @@ export default function App() {
 
         <main id="main">
           <section id="home" className="hero" aria-labelledby="hero-title">
-            <motion.img className="hero-image" src="/images/spa-hero.jpg" alt="A peaceful moment of facial massage, wrapped in soft cream linens" fetchPriority="high" initial={{ scale: reduceMotion ? 1 : 1.045 }} animate={{ scale: 1 }} transition={{ duration: reduceMotion ? 0 : 2.2, ease: [0.22, 1, 0.36, 1] }} />
+            <motion.img className="hero-image" src="images/spa-hero.jpg" alt="A peaceful moment of facial massage, wrapped in soft cream linens" fetchPriority="high" initial={{ scale: reduceMotion ? 1 : 1.045 }} animate={{ scale: 1 }} transition={{ duration: reduceMotion ? 0 : 2.2, ease: [0.22, 1, 0.36, 1] }} />
             <div className="page-width hero-inner">
               <motion.div className="hero-copy" initial={reduceMotion ? 'visible' : 'hidden'} animate="visible" variants={{ visible: { transition: { staggerChildren: 0.11, delayChildren: 0.12 } } }}>
                 <motion.p className="eyebrow hero-eyebrow" variants={heroItem} transition={{ duration: 0.65 }}>WELCOME TO STACY'S ESTHETICS</motion.p>
@@ -174,7 +174,7 @@ export default function App() {
 
           <section id="philosophy" className="philosophy-section" aria-labelledby="philosophy-title">
             <div className="page-width philosophy-grid">
-              <Reveal className="philosophy-image-wrap"><img src="/images/our-space.jpg" alt="Warm sunlight falling across a linen-covered treatment bed in a serene beige spa" loading="lazy" width="640" height="800" /></Reveal>
+              <Reveal className="philosophy-image-wrap"><img src="images/our-space.jpg" alt="Warm sunlight falling across a linen-covered treatment bed in a serene beige spa" loading="lazy" width="640" height="800" /></Reveal>
               <Reveal className="philosophy-copy" delay={0.12}>
                 <p className="eyebrow">A THOUGHTFUL APPROACH TO YOU</p>
                 <h2 id="philosophy-title" className="section-title">More than a treatment.<br />A moment to <em>come<br className="philosophy-break" /> back to you.</em></h2>

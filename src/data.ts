@@ -22,7 +22,7 @@ export const services: Service[] = [
     title: 'A fresh start for your skin.',
     description:
       'A moment to reset, with your skin at the center. Explore a facial ritual that pairs thoughtful skincare with the simple pleasure of being cared for.',
-    image: '/images/facial.jpg',
+    image: 'images/facial.jpg',
     alt: 'A woman relaxing as a creamy facial mask is gently applied with a brush',
     experience: [
       'A conversation about your skin and goals',
@@ -57,7 +57,7 @@ export const services: Service[] = [
     title: 'A little definition. Still you.',
     description:
       'A considered, consultation-first approach to lip enhancement. Explore your goals, natural proportions, and options with an appropriately licensed medical provider.',
-    image: '/images/lips.jpg',
+    image: 'images/lips.jpg',
     alt: 'An editorial close-up of natural, softly defined lips in warm light',
     experience: [
       'A consultation before any treatment decision',
@@ -74,7 +74,7 @@ export const services: Service[] = [
     title: 'Clear your head. Find your calm.',
     description:
       'A little less noise. A little more stillness. Discover a sensory scalp-care ritual that invites you to switch off and enjoy a deeply relaxing pause.',
-    image: '/images/head-spa.jpg',
+    image: 'images/head-spa.jpg',
     alt: 'A woman enjoying a gentle scalp massage and hair wash at a head spa',
     experience: [
       'A conversation about your scalp and hair',
