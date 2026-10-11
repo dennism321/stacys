@@ -55,7 +55,7 @@ svg { flex-shrink: 0; }
 
 /* The hero is one full-bleed photograph, with a soft scrim for readable type. */
 .site-header { position: sticky; top: 0; z-index: 30; background: rgba(250, 247, 242, 0.97); border-bottom: 1px solid rgba(145, 116, 92, 0.12); }
-.site-header { --pendant-scale: 1; --pendant-scrolled: 0.5; --pendant-gap: 270px; }
+.site-header { --pendant-scale: 1.4; --pendant-scrolled: 0.5; --pendant-gap: 370px; }
 .header-inner { position: relative; width: min(100% - 112px, 1312px); height: 88px; margin-inline: auto; display: grid; grid-template-columns: minmax(0, 1fr) var(--pendant-gap) minmax(0, 1fr); align-items: center; }
 .header-side { display: flex; align-items: center; min-width: 0; }
 .header-left { grid-column: 1; justify-content: flex-start; }
@@ -73,9 +73,9 @@ svg { flex-shrink: 0; }
 .brand-name { margin-top: 2px; font-family: 'Great Vibes', cursive; font-size: 30px; font-weight: 400; line-height: 1.1; white-space: nowrap; }
 .brand-tagline { margin-top: 5px; margin-right: -0.3em; font-size: 8px; font-weight: 450; letter-spacing: 0.3em; line-height: 1.2; text-transform: uppercase; white-space: nowrap; color: #000000; }
 .brand-logo-footer { align-items: flex-start; }
-.brand-logo-footer .brand-mark { width: 104px; margin-left: -6px; }
-.brand-logo-footer .brand-name { font-size: 38px; color: #ffffff; }
-.brand-logo-footer .brand-tagline { font-size: 8px; color: #ffffff; }
+.brand-logo-footer .brand-mark { width: 146px; margin-left: -6px; }
+.brand-logo-footer .brand-name { font-size: 53px; color: #ffffff; }
+.brand-logo-footer .brand-tagline { font-size: 11px; color: #ffffff; }
 .desktop-nav a { position: relative; padding: 12px 0; font-size: 12px; letter-spacing: 0.015em; }
 .desktop-nav a::after { content: ''; position: absolute; bottom: 5px; left: 0; height: 1px; width: 100%; background: #9b7a62; transform: scaleX(0); transform-origin: left; transition: transform 220ms; }
 .desktop-nav a:hover::after { transform: scaleX(1); }
@@ -273,7 +273,7 @@ svg { flex-shrink: 0; }
 
 @media (max-width: 1150px) {
   .page-width { width: calc(100% - 88px); }
-  .site-header { --pendant-scale: 0.92; --pendant-gap: 250px; }
+  .site-header { --pendant-scale: 1.29; --pendant-gap: 340px; }
   .header-inner { width: calc(100% - 72px); }
   .desktop-nav { gap: 23px; }
   .desktop-nav a { font-size: 11px; }
@@ -295,7 +295,7 @@ svg { flex-shrink: 0; }
 }
 
 @media (max-width: 900px) {
-  .site-header { --pendant-scale: 0.84; --pendant-scrolled: 0.443; --pendant-gap: 214px; }
+  .site-header { --pendant-scale: 1.18; --pendant-scrolled: 0.443; --pendant-gap: 300px; }
   .header-inner { height: 78px; }
   .desktop-nav { gap: 16px; }
   .desktop-nav a { font-size: 10px; }
@@ -330,7 +330,7 @@ svg { flex-shrink: 0; }
 @media (max-width: 767px) {
   html { scroll-padding-top: 90px; }
   .page-width { width: calc(100% - 48px); }
-  .site-header { --pendant-scale: 0.72; --pendant-scrolled: 0.415; --pendant-gap: 130px; }
+  .site-header { --pendant-scale: 1.01; --pendant-scrolled: 0.415; --pendant-gap: 182px; }
   .header-inner { width: calc(100% - 40px); height: 73px; }
   .desktop-nav, .desktop-book-label { display: none; }
   .mobile-book-label { display: inline; }
@@ -391,7 +391,7 @@ svg { flex-shrink: 0; }
   .site-footer { padding-top: 44px; }
   .footer-top { grid-template-columns: 1fr 1fr; gap: 31px 27px; padding-bottom: 33px; }
   .footer-brand { grid-column: 1 / -1; }
-  .brand-logo-footer .brand-name { font-size: 34px; }
+  .brand-logo-footer .brand-name { font-size: 48px; }
   .footer-brand p { font-size: 10px; margin-top: 11px; }
   .footer-nav { gap: 12px; }
   .footer-nav a, .footer-nav button { font-size: 11px; }
@@ -439,7 +439,7 @@ svg { flex-shrink: 0; }
 }
 
 @media (max-width: 390px) {
-  .site-header { --pendant-scale: 0.66; --pendant-gap: 120px; }
+  .site-header { --pendant-scale: 0.92; --pendant-gap: 168px; }
   .header-inner { width: calc(100% - 28px); }
   .header-booking { padding-inline: 11px; gap: 6px; font-size: 9px; }
   .header-booking svg { display: none; }
