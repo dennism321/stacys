@@ -68,14 +68,14 @@ svg { flex-shrink: 0; }
 .brand-pendant:hover .brand-mark { transform: rotate(-2deg) scale(1.03); }
 .is-scrolled .brand-pendant { transform: translateX(-50%) scale(var(--pendant-scrolled)); box-shadow: none; }
 .is-scrolled .brand-pendant::after { opacity: 0; }
-.brand-logo { display: flex; flex-direction: column; align-items: center; color: #3a2e25; }
+.brand-logo { display: flex; flex-direction: column; align-items: center; color: #000000; }
 .brand-mark { display: block; width: 128px; height: auto; transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1); }
 .brand-name { margin-top: 2px; font-family: 'Great Vibes', cursive; font-size: 30px; font-weight: 400; line-height: 1.1; white-space: nowrap; }
-.brand-tagline { margin-top: 5px; margin-right: -0.3em; font-size: 8px; font-weight: 450; letter-spacing: 0.3em; line-height: 1.2; text-transform: uppercase; white-space: nowrap; color: #6f5d50; }
+.brand-tagline { margin-top: 5px; margin-right: -0.3em; font-size: 8px; font-weight: 450; letter-spacing: 0.3em; line-height: 1.2; text-transform: uppercase; white-space: nowrap; color: #000000; }
 .brand-logo-footer { align-items: flex-start; }
 .brand-logo-footer .brand-mark { width: 104px; margin-left: -6px; }
-.brand-logo-footer .brand-name { font-size: 38px; color: #f5ebdf; }
-.brand-logo-footer .brand-tagline { font-size: 8px; color: #cdb9a6; }
+.brand-logo-footer .brand-name { font-size: 38px; color: #ffffff; }
+.brand-logo-footer .brand-tagline { font-size: 8px; color: #ffffff; }
 .desktop-nav a { position: relative; padding: 12px 0; font-size: 12px; letter-spacing: 0.015em; }
 .desktop-nav a::after { content: ''; position: absolute; bottom: 5px; left: 0; height: 1px; width: 100%; background: #9b7a62; transform: scaleX(0); transform-origin: left; transition: transform 220ms; }
 .desktop-nav a:hover::after { transform: scaleX(1); }

@@ -2,11 +2,12 @@ import { useId } from 'react';
 
 type BrandMarkProps = {
   gapColor?: string;
+  letterColor?: string;
   className?: string;
 };
 
-/** The brushstroke "S" monogram, recolored to the studio's warm taupe and sand palette. */
-export function BrandMark({ gapColor = '#faf7f2', className = '' }: BrandMarkProps) {
+/** The brushstroke "S" monogram, in the official logo's rose-gold, gold, and black. */
+export function BrandMark({ gapColor = '#faf7f2', letterColor = '#000000', className = '' }: BrandMarkProps) {
   const id = useId().replace(/:/g, '');
   const brush = `${id}-brush`;
   const gold = `${id}-gold`;
@@ -15,14 +16,14 @@ export function BrandMark({ gapColor = '#faf7f2', className = '' }: BrandMarkPro
     <svg viewBox="0 0 240 160" className={className} aria-hidden="true" focusable="false">
       <defs>
         <linearGradient id={brush} x1="16" y1="22" x2="228" y2="140" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stopColor="#8b6852" />
-          <stop offset="0.48" stopColor="#bc9a80" />
-          <stop offset="1" stopColor="#ecdac7" />
+          <stop offset="0" stopColor="#b9897f" />
+          <stop offset="0.48" stopColor="#d4a99f" />
+          <stop offset="1" stopColor="#f1cbc1" />
         </linearGradient>
         <linearGradient id={gold} x1="90" y1="28" x2="160" y2="140" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stopColor="#e6cc98" />
-          <stop offset="0.5" stopColor="#b48a55" />
-          <stop offset="1" stopColor="#dcbd84" />
+          <stop offset="0" stopColor="#ead588" />
+          <stop offset="0.5" stopColor="#b88d37" />
+          <stop offset="1" stopColor="#ead588" />
         </linearGradient>
       </defs>
 
@@ -59,7 +60,7 @@ export function BrandMark({ gapColor = '#faf7f2', className = '' }: BrandMarkPro
         fontStyle="italic"
         fontWeight="600"
         fontSize="150"
-        fill="#3a2e25"
+        fill={letterColor}
         stroke={`url(#${gold})`}
         strokeWidth="3.4"
         paintOrder="stroke"
@@ -79,7 +80,11 @@ type BrandLogoProps = {
 export default function BrandLogo({ variant = 'header', className = '' }: BrandLogoProps) {
   return (
     <span className={`brand-logo brand-logo-${variant} ${className}`}>
-      <BrandMark className="brand-mark" gapColor={variant === 'footer' ? '#4e4035' : '#faf7f2'} />
+      <BrandMark
+        className="brand-mark"
+        gapColor={variant === 'footer' ? '#4e4035' : '#faf7f2'}
+        letterColor={variant === 'footer' ? '#ffffff' : '#000000'}
+      />
       <span className="brand-name">Stacy's Esthetics</span>
       <span className="brand-tagline">Fall in love with yourself</span>
     </span>
