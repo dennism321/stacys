@@ -131,6 +131,7 @@ export default function App() {
               <BrandLogo />
             </a>
             <div className="header-side header-right">
+              <SocialLinks className="header-social" />
               <button type="button" className="button button-primary header-booking" onClick={() => openPlanner()}>
                 <span className="desktop-book-label">{savedDraft ? 'View your appointment plan' : 'Book an appointment'}</span>
                 <span className="mobile-book-label">{savedDraft ? 'Your plan' : 'Book'}</span>
@@ -144,6 +145,7 @@ export default function App() {
                 <a href="#services" onClick={() => setMenuOpen(false)}>Our Services<ArrowUpRight size={18} /></a>
                 <a href="#philosophy" onClick={() => setMenuOpen(false)}>Our Philosophy<ArrowUpRight size={18} /></a>
                 <a href="#visit" onClick={() => setMenuOpen(false)}>Your Visit<ArrowUpRight size={18} /></a>
+                <SocialLinks className="mobile-nav-social" />
               </motion.nav>
             )}
           </AnimatePresence>
