@@ -40,7 +40,7 @@ export const services: Service[] = [
     description:
       'Trade the everyday rush for a slower rhythm. A restorative massage experience creates space to relax, unwind, and reconnect with your body.',
     image:
-      'https://images.pexels.com/photos/6628586/pexels-photo-6628586.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800',
+      'images/massage.jpg',
     alt: 'A therapist gently massaging a back in a warm, peaceful spa setting',
     experience: [
       'Time to discuss your comfort and preferences',

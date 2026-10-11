@@ -65,7 +65,7 @@ export function PolicyDetails({ initialTab, hasDraft, onDelete }: {
             <p>Your appointment details are stored in this browser's local storage only when you choose to save a plan. They are not sent to a server, emailed to the studio, or used for marketing by this website.</p>
             <p>A downloaded plan contains the details you entered. Keep it somewhere private, particularly if you use a shared device. Please do not add medical or sensitive information to the planner.</p>
             <h3>External content</h3>
-            <p>Fonts and some photography load from Google Fonts and Pexels. These providers receive standard network information when their content loads. This website does not add analytics or advertising cookies.</p>
+            <p>Fonts load from Google Fonts. Google receives standard network information when the fonts load. This website does not add analytics or advertising cookies.</p>
             <h3>You're in control</h3>
             <p>You can remove your saved plan below or clear this site's data in your browser settings. Deleting it here will not remove a copy you have already downloaded.</p>
             <button type="button" className="button button-outline" disabled={!hasDraft} onClick={() => {

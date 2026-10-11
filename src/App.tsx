@@ -28,18 +28,6 @@ function Reveal({ children, className = '', delay = 0 }: { children: ReactNode; 
   );
 }
 
-function useMediaQuery(query: string) {
-  const [matches, setMatches] = useState(() => window.matchMedia(query).matches);
-  useEffect(() => {
-    const list = window.matchMedia(query);
-    const update = () => setMatches(list.matches);
-    update();
-    list.addEventListener('change', update);
-    return () => list.removeEventListener('change', update);
-  }, [query]);
-  return matches;
-}
-
 function Botanical({ className = '' }: { className?: string }) {
   return (
     <svg viewBox="0 0 92 116" fill="none" className={className} aria-hidden="true">
@@ -56,12 +44,11 @@ export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
-  const [savedDraft, setSavedDraft] = useState<AppointmentDraft | null>(readDraft);
+  // Read on mount, not during render, so the pre-rendered HTML matches the first client render.
+  const [savedDraft, setSavedDraft] = useState<AppointmentDraft | null>(null);
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
   const dialogTriggerRef = useRef<HTMLElement | null>(null);
   const reduceMotion = useReducedMotion();
-  const isPhone = useMediaQuery('(max-width: 767px)');
-  // Phones get the full portrait clip; wider screens get a squarer crop on the right.
-  const heroMedia = isPhone ? 'images/headspa-mobile' : 'images/headspa-desktop';
   const closeDialog = useCallback(() => setDialog(null), []);
   const showDialog = useCallback((next: Exclude<OpenDialog, null>) => {
     if (!dialog) dialogTriggerRef.current = document.activeElement as HTMLElement | null;
@@ -102,6 +89,11 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    if (reduceMotion) heroVideoRef.current?.pause();
+  }, [reduceMotion]);
+
+  useEffect(() => {
+    setSavedDraft(readDraft());
     const syncDraft = (event: StorageEvent) => {
       if (event.key === DRAFT_KEY || event.key === null) setSavedDraft(readDraft());
     };
@@ -153,11 +145,11 @@ export default function App() {
 
         <main id="main">
           <section id="home" className="hero" aria-labelledby="hero-title">
-            {reduceMotion ? (
-              <img className="hero-image hero-video" src={`${heroMedia}-poster.jpg`} alt="A head spa water ritual at Stacy's Esthetics, with warm water streaming through the hair" fetchPriority="high" />
-            ) : (
-              <motion.video key={heroMedia} className="hero-image hero-video" src={`${heroMedia}.mp4`} poster={`${heroMedia}-poster.jpg`} autoPlay muted loop playsInline preload="auto" aria-hidden="true" initial={{ scale: 1.045 }} animate={{ scale: 1 }} transition={{ duration: 2.2, ease: [0.22, 1, 0.36, 1] }} />
-            )}
+            {/* Phones get the full portrait clip; wider screens get a squarer crop shown on the right. */}
+            <motion.video ref={heroVideoRef} className="hero-image hero-video" poster="images/headspa-desktop-poster.jpg" autoPlay muted loop playsInline preload="auto" aria-hidden="true" initial={{ scale: reduceMotion ? 1 : 1.045 }} animate={{ scale: 1 }} transition={{ duration: reduceMotion ? 0 : 2.2, ease: [0.22, 1, 0.36, 1] }}>
+              <source media="(max-width: 767px)" src="images/headspa-mobile.mp4" type="video/mp4" />
+              <source src="images/headspa-desktop.mp4" type="video/mp4" />
+            </motion.video>
             <div className="page-width hero-inner">
               <motion.div className="hero-copy" initial={reduceMotion ? 'visible' : 'hidden'} animate="visible" variants={{ visible: { transition: { staggerChildren: 0.11, delayChildren: 0.12 } } }}>
                 <motion.p className="eyebrow hero-eyebrow" variants={heroItem} transition={{ duration: 0.65 }}>WELCOME TO STACY'S ESTHETICS</motion.p>
