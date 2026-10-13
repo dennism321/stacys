@@ -6,22 +6,24 @@ import {
   formatDate,
   localDateString,
   readDraft,
-  services,
   type AppointmentDraft,
-  type ServiceId,
 } from '../data';
+import { findServicePage, servicePages, startingPrice, treatmentOptions } from '../servicePages';
 
 type PlannerProps = {
-  initialService?: ServiceId;
+  /** A service page slug to pre-select. Ignored if it isn't a bookable service. */
+  initialService?: string;
   savedDraft: AppointmentDraft | null;
   onSave: (draft: AppointmentDraft) => void;
   onDelete: () => boolean;
 };
 
-export default function AppointmentPlanner({ initialService, savedDraft, onSave, onDelete }: PlannerProps) {
+export default function AppointmentPlanner({ initialService: requestedService, savedDraft, onSave, onDelete }: PlannerProps) {
+  const initialService = requestedService && findServicePage(requestedService) ? requestedService : undefined;
   const [step, setStep] = useState(initialService ? 1 : 0);
   const [complete, setComplete] = useState(Boolean(savedDraft && !initialService));
-  const [serviceId, setServiceId] = useState<ServiceId | ''>(initialService || savedDraft?.serviceId || '');
+  const [serviceId, setServiceId] = useState(initialService || savedDraft?.serviceId || '');
+  const [treatment, setTreatment] = useState(initialService && initialService !== savedDraft?.serviceId ? '' : savedDraft?.treatment || '');
   const [date, setDate] = useState(savedDraft?.date || '');
   const [time, setTime] = useState(savedDraft?.time || 'No preference');
   const [name, setName] = useState(savedDraft?.name || '');
@@ -35,7 +37,7 @@ export default function AppointmentPlanner({ initialService, savedDraft, onSave,
   const [confirmDelete, setConfirmDelete] = useState(false);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const reduceMotion = useReducedMotion();
-  const selectedService = services.find((service) => service.id === serviceId);
+  const selectedService = findServicePage(serviceId);
 
   function goToStep(next: number) {
     setError('');
@@ -71,6 +73,7 @@ export default function AppointmentPlanner({ initialService, savedDraft, onSave,
     const draft: AppointmentDraft = {
       version: 1,
       serviceId,
+      treatment,
       date,
       time,
       name: name.trim(),
@@ -99,7 +102,8 @@ export default function AppointmentPlanner({ initialService, savedDraft, onSave,
       '',
       'DRAFT ONLY: This is not a confirmed appointment and has not been sent to the studio.',
       '',
-      `Treatment: ${selectedService?.name || ''}${serviceId === 'lips' ? ' consultation' : ''}`,
+      `Service: ${selectedService?.name || ''}`,
+      `Treatment: ${treatment || 'Not decided yet'}`,
       `Preferred date: ${formatDate(date)}`,
       `Preferred time: ${time}`,
       `Name: ${name.trim()}`,
@@ -151,7 +155,7 @@ export default function AppointmentPlanner({ initialService, savedDraft, onSave,
           {' '}It has not been sent to the studio and is not a confirmed appointment.
         </p>
         <dl className="plan-summary">
-          <div><dt>Your ritual</dt><dd>{selectedService?.name}{serviceId === 'lips' ? ' consultation' : ''}</dd></div>
+          <div><dt>Your ritual</dt><dd>{selectedService?.name}{treatment && <span>{treatment}</span>}</dd></div>
           <div><dt>Preferred date</dt><dd>{formatDate(date)}</dd></div>
           <div><dt>Preferred time</dt><dd>{time}</dd></div>
           <div><dt>Your details</dt><dd>{name}<span>{email}</span>{phone && <span>{phone}</span>}</dd></div>
@@ -201,20 +205,31 @@ export default function AppointmentPlanner({ initialService, savedDraft, onSave,
             {step === 0 && (
               <fieldset className="treatment-options">
                 <legend className="form-section-title">What would feel good today?</legend>
-                {services.map((service) => (
-                  <label key={service.id} className={`treatment-option ${serviceId === service.id ? 'is-selected' : ''}`}>
-                    <input type="radio" name="treatment" value={service.id} checked={serviceId === service.id} onChange={() => { setServiceId(service.id); setError(''); }} required />
-                    <img src={service.image} alt="" width="54" height="58" />
-                    <span className="option-copy"><strong>{service.name}{service.id === 'lips' ? ' consultation' : ''}</strong><span>{service.caption}</span></span>
-                    <span className="radio-indicator" aria-hidden="true">{serviceId === service.id && <span />}</span>
-                  </label>
-                ))}
+                {servicePages.map((page) => {
+                  const from = startingPrice(page);
+                  return (
+                    <label key={page.slug} className={`treatment-option treatment-option-text ${serviceId === page.slug ? 'is-selected' : ''}`}>
+                      <input type="radio" name="treatment" value={page.slug} checked={serviceId === page.slug} onChange={() => { if (serviceId !== page.slug) setTreatment(''); setServiceId(page.slug); setError(''); }} required />
+                      <span className="option-copy"><strong>{page.name}</strong><span>{page.blurb}</span></span>
+                      {from !== undefined && <span className="option-price">from ${from}</span>}
+                      <span className="radio-indicator" aria-hidden="true">{serviceId === page.slug && <span />}</span>
+                    </label>
+                  );
+                })}
               </fieldset>
             )}
             {step === 1 && (
               <div className="planner-fields">
                 <p className="form-section-title">When could you use a little pause?</p>
-                <div className="selected-treatment-line"><span>Your ritual</span><strong>{selectedService?.name}{serviceId === 'lips' ? ' consultation' : ''}</strong><button type="button" className="text-button" onClick={() => goToStep(0)}>Change</button></div>
+                <div className="selected-treatment-line"><span>Your ritual</span><strong>{selectedService?.name}</strong><button type="button" className="text-button" onClick={() => goToStep(0)}>Change</button></div>
+                {selectedService && (
+                  <label className="field-label" htmlFor="appointment-treatment">Treatment <span className="optional">(optional)</span>
+                    <select id="appointment-treatment" value={treatment} onChange={(event) => setTreatment(event.target.value)}>
+                      <option value="">Not sure yet, help me choose</option>
+                      {treatmentOptions(selectedService).map((option) => <option key={option} value={option}>{option}</option>)}
+                    </select>
+                  </label>
+                )}
                 <label className="field-label" htmlFor="appointment-date">Preferred date<input id="appointment-date" type="date" value={date} min={localDateString()} required onChange={(event) => { setDate(event.target.value); setError(''); }} /></label>
                 <label className="field-label" htmlFor="appointment-time">Preferred time of day<select id="appointment-time" value={time} onChange={(event) => setTime(event.target.value)}><option>No preference</option><option>Morning</option><option>Afternoon</option></select></label>
                 <p className="form-note">These are your preferences, not available appointment slots. The studio must confirm all dates and times.</p>

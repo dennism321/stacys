@@ -1,3 +1,5 @@
+import { asset } from '../paths';
+
 type BrandLogoProps = {
   variant?: 'header' | 'footer';
   className?: string;
@@ -9,7 +11,7 @@ type BrandLogoProps = {
  * dry-brush texture matches exactly: black "S" on light backgrounds, white on dark.
  */
 export default function BrandLogo({ variant = 'header', className = '' }: BrandLogoProps) {
-  const mark = variant === 'footer' ? 'images/logo-mark-light.webp' : 'images/logo-mark-dark.webp';
+  const mark = asset(variant === 'footer' ? 'images/logo-mark-light.webp' : 'images/logo-mark-dark.webp');
 
   return (
     <span className={`brand-logo brand-logo-${variant} ${className}`}>

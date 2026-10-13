@@ -10,11 +10,11 @@ export function TreatmentDetails({ service, onChoose }: { service: Service; onCh
         <p className="eyebrow">{service.eyebrow}</p>
         <h2 id="treatment-title" className="dialog-title">{service.title}</h2>
         <p className="dialog-intro">{service.description}</p>
-        <p className="detail-label">YOUR {service.id === 'lips' ? 'CONSULTATION' : 'EXPERIENCE'}</p>
+        <p className="detail-label">YOUR EXPERIENCE</p>
         <ul className="experience-list">{service.experience.map((item) => <li key={item}>{item}</li>)}</ul>
-        <p className={`treatment-note ${service.id === 'lips' ? 'medical-note' : ''}`}>{service.note}</p>
+        <p className="treatment-note">{service.note}</p>
         <button type="button" className="button button-primary" onClick={() => onChoose(service.id)}>
-          {service.id === 'lips' ? 'Plan a consultation' : 'Choose this treatment'}<ArrowRight size={16} />
+          Choose this treatment<ArrowRight size={16} />
         </button>
       </div>
     </div>
@@ -57,7 +57,7 @@ export function PolicyDetails({ initialTab, hasDraft, onDelete }: {
             <h3>About the appointment planner</h3>
             <p>The planner creates a personal draft on your device. It does not contact the studio, reserve a time, or take a payment. All appointments, pricing, and treatment details require direct confirmation.</p>
             <h3>Medical consultations</h3>
-            <p>Lip injections require an assessment and informed consent with an appropriately licensed medical provider. A saved plan is not a medical consultation or clearance for treatment.</p>
+            <p>Some treatments, such as PRP microneedling, mesotherapy, and post-op care, may need a consultation before your first session. A saved plan is not a medical consultation.</p>
           </>
         ) : (
           <>
