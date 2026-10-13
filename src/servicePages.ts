@@ -127,7 +127,7 @@ export const servicePages: ServicePage[] = [
       'Our head spa is a slow, sensory ritual for the scalp: warm water streams through your hair beneath the halo while gentle hands cleanse, massage, and release the tension you did not know you were holding.',
       'Choose the 50-minute head spa, or extend it with deep hydration for hair that feels as renewed as you do. For a fuller reset, the detox package combines sauna blanket sessions, lymphatic massage, and exfoliation.',
     ],
-    image: { src: asset('images/headspa-desktop-poster.jpg'), alt: 'A head spa water ritual at Stacy\'s Esthetics, with water streaming through the hair beneath a halo' },
+    image: { src: asset('images/headspa-desktop-hd-poster.jpg'), alt: 'A head spa water ritual at Stacy\'s Esthetics, with water streaming through the hair beneath a halo' },
     groups: [
       {
         title: 'Head spa',
