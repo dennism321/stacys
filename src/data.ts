@@ -13,6 +13,20 @@ export type Service = {
   note: string;
 };
 
+/** Studio contact details, as published on the studio's Wix site. Keep index.html's JSON-LD in sync. */
+export const studio = {
+  street: '26 Union City Rd.',
+  locality: 'Prospect, CT 06712',
+  phone: '914-310-4680',
+  phoneHref: 'tel:+19143104680',
+  mapsHref: 'https://www.google.com/maps/search/?api=1&query=26+Union+City+Rd%2C+Prospect%2C+CT+06712',
+  hours: [
+    { days: 'Monday – Friday', time: '9:30 am – 6:00 pm' },
+    { days: 'Saturday', time: '9:30 am – 4:00 pm' },
+    { days: 'Sunday', time: 'Closed' },
+  ],
+};
+
 export const services: Service[] = [
   {
     id: 'facials',
@@ -109,7 +123,7 @@ export const faqs = [
   {
     question: 'Where is the studio located?',
     answer:
-      'The studio address, contact details, and opening hours are being confirmed and are not yet published here. Please verify your location and appointment directly with the studio before making travel plans.',
+      "You'll find the studio at 26 Union City Rd. in Prospect, CT 06712. We're open Monday to Friday from 9:30 am to 6:00 pm and Saturday from 9:30 am to 4:00 pm, and closed on Sunday. Call 914-310-4680 with any questions before your visit.",
   },
 ];
 

@@ -1,6 +1,6 @@
 import { useState, type KeyboardEvent } from 'react';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
-import { type Service, type ServiceId } from '../data';
+import { studio, type Service, type ServiceId } from '../data';
 
 export function TreatmentDetails({ service, onChoose }: { service: Service; onChoose: (id: ServiceId) => void }) {
   return (
@@ -84,9 +84,13 @@ export function StudioDetails({ onClose }: { onClose: () => void }) {
     <div className="info-dialog-content studio-dialog-content">
       <p className="eyebrow">WE LOOK FORWARD TO WELCOMING YOU</p>
       <h2 id="studio-title" className="dialog-title">Your next place to <em>pause.</em></h2>
-      <p className="dialog-intro">A few studio details are still being confirmed.</p>
-      <dl className="studio-details"><div><dt>Studio address</dt><dd>To be confirmed</dd></div><div><dt>Opening hours</dt><dd>To be confirmed</dd></div><div><dt>Phone & email</dt><dd>To be confirmed</dd></div></dl>
-      <p className="form-note">Please verify the address and appointment directly with the studio before travelling. Photography on this website is illustrative.</p>
+      <p className="dialog-intro">Find us in Prospect, Connecticut.</p>
+      <dl className="studio-details">
+        <div><dt>Studio address</dt><dd><a href={studio.mapsHref} target="_blank" rel="noopener noreferrer">{studio.street}<br />{studio.locality}</a></dd></div>
+        <div><dt>Opening hours</dt><dd>{studio.hours.map((row) => <span key={row.days}>{row.days}: {row.time}</span>)}</dd></div>
+        <div><dt>Phone</dt><dd><a href={studio.phoneHref}>{studio.phone}</a></dd></div>
+      </dl>
+      <p className="form-note">Please confirm your appointment with the studio before your visit. Photography on this website is illustrative.</p>
       <a className="button button-primary" href="#services" onClick={onClose}>Find your ritual<ArrowUpRight size={16} /></a>
     </div>
   );

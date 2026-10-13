@@ -6,7 +6,7 @@ import AppointmentPlanner from './components/AppointmentPlanner';
 import BrandLogo from './components/BrandLogo';
 import SocialLinks from './components/SocialLinks';
 import { PolicyDetails, StudioDetails, TreatmentDetails } from './components/StudioDialogs';
-import { DRAFT_KEY, faqs, readDraft, services, type AppointmentDraft, type ServiceId } from './data';
+import { DRAFT_KEY, faqs, readDraft, services, studio, type AppointmentDraft, type ServiceId } from './data';
 
 type OpenDialog =
   | { type: 'treatment'; serviceId: ServiceId }
@@ -239,6 +239,7 @@ export default function App() {
               <div className="footer-brand"><a href="#home" aria-label="Stacy's Esthetics, back to top"><BrandLogo variant="footer" /></a><p>Beauty in balance. Care without hurry.</p><SocialLinks /></div>
               <nav className="footer-nav" aria-label="Explore"><p className="footer-label">EXPLORE</p><a href="#services">Our services</a><a href="#philosophy">Our philosophy</a><a href="#visit">Your visit</a></nav>
               <nav className="footer-nav" aria-label="Studio information"><p className="footer-label">A LITTLE MORE</p><button type="button" onClick={() => showDialog({ type: 'studio' })}>Studio & contact<ArrowUpRight size={13} /></button><button type="button" onClick={() => showDialog({ type: 'policies', tab: 'booking' })}>Booking policies</button><button type="button" onClick={() => openPlanner()}>Your appointment plan</button></nav>
+              <address className="footer-visit"><p className="footer-label">VISIT US</p><a href={studio.mapsHref} target="_blank" rel="noopener noreferrer">{studio.street}<br />{studio.locality}</a><a href={studio.phoneHref}>{studio.phone}</a><dl className="footer-hours">{studio.hours.map((row) => <div key={row.days} style={{ display: 'contents' }}><dt>{row.days}</dt><dd>{row.time}</dd></div>)}</dl></address>
             </div>
             <div className="footer-bottom"><p>&copy; {new Date().getFullYear()} Stacy's Esthetics. All rights reserved.</p><button type="button" onClick={() => showDialog({ type: 'policies', tab: 'privacy' })}>Privacy & your data</button><a href="#home" className="back-to-top">Back to the slow life<ArrowUp size={14} strokeWidth={1.4} /></a></div>
           </div>
