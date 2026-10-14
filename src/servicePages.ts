@@ -31,6 +31,8 @@ export type ServicePage = {
   tagline: string;
   intro: string[];
   image?: { src: string; alt: string };
+  /** Book through the studio's Square Appointments page instead of the on-site planner. */
+  squareBooking?: { widgetUrl: string; bookUrl: string };
   /** The home page tile: photo, alt text, and a one-line caption. */
   tile: { src: string; alt: string; caption: string };
   groups: MenuGroup[];
@@ -77,6 +79,11 @@ export const servicePages: ServicePage[] = [
   },
   {
     slug: 'facials',
+    squareBooking: {
+      // From the studio's Square Appointments embed code (widget ru24helt2qhr6e, location L2A59ABR9VW2A).
+      widgetUrl: 'https://app.squareup.com/appointments/buyer/widget/ru24helt2qhr6e/L2A59ABR9VW2A',
+      bookUrl: 'https://app.squareup.com/appointments/book/ru24helt2qhr6e/L2A59ABR9VW2A/start',
+    },
     tile: { src: asset('images/facial.jpg'), alt: "A woman relaxing as a creamy facial mask is gently applied with a brush", caption: 'Your skin, beautifully refreshed.' },
     name: 'Facials',
     blurb: 'Custom facials and microneedling',

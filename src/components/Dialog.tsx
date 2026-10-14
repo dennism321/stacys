@@ -29,7 +29,7 @@ export default function Dialog({ children, onClose, labelledBy, className = '' }
 
       const focusable = Array.from(
         dialogRef.current.querySelectorAll<HTMLElement>(
-          'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex="0"]',
+          'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), iframe, [tabindex="0"]',
         ),
       ).filter((element) => element.getClientRects().length > 0);
       const first = focusable[0];

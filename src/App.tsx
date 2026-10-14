@@ -7,6 +7,7 @@ import BrandLogo from './components/BrandLogo';
 import SocialLinks from './components/SocialLinks';
 import { MobileServicesMenu, ServicesMenu } from './components/ServicesMenu';
 import ServicePageView from './components/ServicePageView';
+import SquareBooking from './components/SquareBooking';
 import { BASE, asset, homeSection, servicePath } from './paths';
 import { servicePages, type ServicePage } from './servicePages';
 import { PolicyDetails, StudioDetails } from './components/StudioDialogs';
@@ -14,6 +15,7 @@ import { DRAFT_KEY, faqs, readDraft, studio, type AppointmentDraft } from './dat
 
 type OpenDialog =
   | { type: 'planner'; serviceId?: string }
+  | { type: 'square' }
   | { type: 'policies'; tab: 'booking' | 'privacy' }
   | { type: 'studio' }
   | null;
@@ -151,7 +153,7 @@ export default function App({ page }: { page?: ServicePage }) {
 
         <main id="main">
           {page ? (
-            <ServicePageView page={page} onBook={() => openPlanner(page.slug)} />
+            <ServicePageView page={page} onBook={() => (page.squareBooking ? showDialog({ type: 'square' }) : openPlanner(page.slug))} />
           ) : (
             <>
             <section id="home" className="hero" aria-labelledby="hero-title">
@@ -261,6 +263,7 @@ export default function App({ page }: { page?: ServicePage }) {
       <AnimatePresence mode="wait" onExitComplete={() => {
         if (!dialog) dialogTriggerRef.current?.focus({ preventScroll: true });
       }}>
+        {dialog?.type === 'square' && page?.squareBooking && <Dialog key="square" onClose={closeDialog} labelledBy="square-booking-title" className="square-dialog"><SquareBooking page={{ ...page, squareBooking: page.squareBooking }} /></Dialog>}
         {dialog?.type === 'planner' && <Dialog key="planner" onClose={closeDialog} labelledBy="planner-title" className="planner-dialog"><AppointmentPlanner initialService={dialog.serviceId} savedDraft={savedDraft} onSave={setSavedDraft} onDelete={deleteDraft} /></Dialog>}
         {dialog?.type === 'policies' && <Dialog key="policies" onClose={closeDialog} labelledBy="policies-title" className="info-dialog"><PolicyDetails initialTab={dialog.tab} hasDraft={Boolean(savedDraft)} onDelete={deleteDraft} /></Dialog>}
         {dialog?.type === 'studio' && <Dialog key="studio" onClose={closeDialog} labelledBy="studio-title" className="info-dialog"><StudioDetails onClose={closeDialog} /></Dialog>}

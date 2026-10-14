@@ -638,3 +638,16 @@ svg { flex-shrink: 0; }
 .treatment-option-text .option-copy { flex: 1; }
 .option-price { font-family: var(--font-serif); font-size: 17px; color: #8a6d57; white-space: nowrap; }
 .plan-summary dd span { display: block; }
+
+/* Square Appointments booking window (Facials page) */
+.square-dialog { max-width: 880px; }
+.square-booking { padding: 44px 40px 28px; }
+.square-booking-heading { margin-bottom: 20px; }
+.square-booking-heading .eyebrow { margin-bottom: 14px; font-size: 12px; }
+.square-booking-frame { display: block; width: 100%; height: min(72dvh, 760px); min-height: 500px; border: 1px solid #e3d6c7; border-radius: 6px; background: #fff; }
+.square-booking-fallback { margin-top: 16px; font-size: 14px; color: #7a6655; text-align: center; }
+.square-booking-fallback a { display: inline-flex; align-items: center; gap: 4px; color: #5d4a3c; text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 767px) {
+  .square-booking { padding: 44px 16px 20px; }
+  .square-booking-frame { height: 70dvh; min-height: 460px; }
+}
