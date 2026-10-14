@@ -133,6 +133,11 @@ export const servicePages: ServicePage[] = [
   },
   {
     slug: 'head-spa',
+    squareBooking: {
+      // From the studio's Square Appointments embed code (widget r26e6n8laza8xu, location L2A59ABR9VW2A).
+      widgetUrl: 'https://app.squareup.com/appointments/buyer/widget/r26e6n8laza8xu/L2A59ABR9VW2A',
+      bookUrl: 'https://app.squareup.com/appointments/book/r26e6n8laza8xu/L2A59ABR9VW2A/start',
+    },
     tile: { src: asset('images/head-spa.jpg'), alt: "A woman enjoying a gentle scalp massage and hair wash at a head spa", caption: 'A clear mind starts at the crown.' },
     name: 'Head Spa & Detox',
     blurb: 'Head spa rituals, sauna, and detox',
