@@ -169,6 +169,11 @@ export const servicePages: ServicePage[] = [
   },
   {
     slug: 'body-contouring',
+    squareBooking: {
+      // From the studio's Square Appointments embed code (widget 06pu25laattt97, location L2A59ABR9VW2A).
+      widgetUrl: 'https://app.squareup.com/appointments/buyer/widget/06pu25laattt97/L2A59ABR9VW2A',
+      bookUrl: 'https://app.squareup.com/appointments/book/06pu25laattt97/L2A59ABR9VW2A/start',
+    },
     tile: { src: asset('images/body-contouring.jpg'), alt: "A therapist sculpting the leg with a wooden roller during a wood therapy session", caption: 'Shape, tone, and define.' },
     image: { src: asset('images/body-contouring.jpg'), alt: "A therapist sculpting the leg with a wooden roller during a wood therapy session" },
     name: 'Body Contouring',
