@@ -231,6 +231,11 @@ export const servicePages: ServicePage[] = [
   },
   {
     slug: 'post-op-recovery',
+    squareBooking: {
+      // From the studio's Square Appointments embed code (widget rnxycw76cn27wi, location L2A59ABR9VW2A).
+      widgetUrl: 'https://app.squareup.com/appointments/buyer/widget/rnxycw76cn27wi/L2A59ABR9VW2A',
+      bookUrl: 'https://app.squareup.com/appointments/book/rnxycw76cn27wi/L2A59ABR9VW2A/start',
+    },
     tile: { src: asset('images/post-op-recovery.jpg'), alt: "A therapist gently massaging a client's arm on soft cream linens", caption: 'Gentle care for your recovery.' },
     image: { src: asset('images/post-op-recovery.jpg'), alt: "A therapist gently massaging a client's arm on soft cream linens" },
     name: 'Post-Op Recovery',
