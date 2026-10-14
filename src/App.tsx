@@ -157,9 +157,9 @@ export default function App({ page }: { page?: ServicePage }) {
             <>
             <section id="home" className="hero" aria-labelledby="hero-title">
               {/* Phones get the full portrait clip; wider screens get a squarer crop shown on the right. */}
-              <motion.video ref={heroVideoRef} className="hero-image hero-video" poster={asset('images/headspa-desktop-hd-poster.jpg')} autoPlay muted loop playsInline preload="auto" aria-hidden="true" initial={{ scale: reduceMotion ? 1 : 1.045 }} animate={{ scale: 1 }} transition={{ duration: reduceMotion ? 0 : 2.2, ease: [0.22, 1, 0.36, 1] }}>
-                <source media="(max-width: 767px)" src={asset('images/headspa-mobile-hd.mp4')} type="video/mp4" />
-                <source src={asset('images/headspa-desktop-hd.mp4')} type="video/mp4" />
+              <motion.video ref={heroVideoRef} className="hero-image hero-video" poster={asset('images/headspa2-desktop-poster.jpg')} autoPlay muted loop playsInline preload="auto" aria-hidden="true" initial={{ scale: reduceMotion ? 1 : 1.045 }} animate={{ scale: 1 }} transition={{ duration: reduceMotion ? 0 : 2.2, ease: [0.22, 1, 0.36, 1] }}>
+                <source media="(max-width: 767px)" src={asset('images/headspa2-phone.mp4')} type="video/mp4" />
+                <source src={asset('images/headspa2-desktop.mp4')} type="video/mp4" />
               </motion.video>
               <div className="page-width hero-inner">
                 <motion.div className="hero-copy" initial={reduceMotion ? 'visible' : 'hidden'} animate="visible" variants={{ visible: { transition: { staggerChildren: 0.11, delayChildren: 0.12 } } }}>
