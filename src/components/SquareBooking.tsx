@@ -1,15 +1,15 @@
 import { ArrowUpRight } from 'lucide-react';
 import { type ServicePage } from '../servicePages';
 
-/** Square Appointments booking calendar, embedded the same way Square's own embed script does. */
-export default function SquareBooking({ page }: { page: ServicePage & { squareBooking: NonNullable<ServicePage['squareBooking']> } }) {
+type SquareService = ServicePage & { squareBooking: NonNullable<ServicePage['squareBooking']> };
+
+/** Narrows a service page to one that books through Square. */
+export const booksOnSquare = (page?: ServicePage): page is SquareService => Boolean(page?.squareBooking);
+
+/** The Square Appointments calendar, embedded the same way Square's own embed script does, plus a new-tab fallback. */
+export function SquareFrame({ page }: { page: SquareService }) {
   return (
-    <div className="square-booking">
-      <div className="square-booking-heading">
-        <p className="eyebrow">BOOK ONLINE</p>
-        <h2 id="square-booking-title" className="dialog-title">Book your <em>{page.name.toLowerCase()}.</em></h2>
-        <p className="dialog-intro">Choose your treatment and a time that suits you. Booking is handled securely by Square.</p>
-      </div>
+    <>
       <iframe
         className="square-booking-frame"
         src={page.squareBooking.widgetUrl}
@@ -20,6 +20,20 @@ export default function SquareBooking({ page }: { page: ServicePage & { squareBo
         Trouble seeing the calendar?{' '}
         <a href={page.squareBooking.bookUrl} target="_blank" rel="noopener noreferrer">Open booking in a new tab<ArrowUpRight size={14} strokeWidth={1.5} /></a>
       </p>
+    </>
+  );
+}
+
+/** Booking dialog content for a service page that books through Square. */
+export default function SquareBooking({ page }: { page: SquareService }) {
+  return (
+    <div className="square-booking">
+      <div className="square-booking-heading">
+        <p className="eyebrow">BOOK ONLINE</p>
+        <h2 id="square-booking-title" className="dialog-title">Book your <em>{page.name.toLowerCase()}.</em></h2>
+        <p className="dialog-intro">Choose your treatment and a time that suits you. Booking is handled securely by Square.</p>
+      </div>
+      <SquareFrame page={page} />
     </div>
   );
 }

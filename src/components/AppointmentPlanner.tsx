@@ -9,6 +9,7 @@ import {
   type AppointmentDraft,
 } from '../data';
 import { findServicePage, servicePages, startingPrice, treatmentOptions } from '../servicePages';
+import { SquareFrame, booksOnSquare } from './SquareBooking';
 
 type PlannerProps = {
   /** A service page slug to pre-select. Ignored if it isn't a bookable service. */
@@ -35,6 +36,8 @@ export default function AppointmentPlanner({ initialService: requestedService, s
   const [persisted, setPersisted] = useState(() => Boolean(savedDraft && readDraft()?.savedAt === savedDraft.savedAt));
   const [downloaded, setDownloaded] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
+  // Services with a Square Appointments code book on Square instead of continuing through the planner.
+  const [onSquare, setOnSquare] = useState(false);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const reduceMotion = useReducedMotion();
   const selectedService = findServicePage(serviceId);
@@ -50,6 +53,12 @@ export default function AppointmentPlanner({ initialService: requestedService, s
     if (!serviceId) {
       setError('Choose a treatment to start planning your visit.');
       setStep(0);
+      return;
+    }
+    if (step === 0 && booksOnSquare(selectedService)) {
+      setError('');
+      setOnSquare(true);
+      requestAnimationFrame(() => headingRef.current?.focus());
       return;
     }
     if (step === 0) {
@@ -181,6 +190,18 @@ export default function AppointmentPlanner({ initialService: requestedService, s
     );
   }
 
+  if (onSquare && booksOnSquare(selectedService)) {
+    return (
+      <div className="planner-content planner-square">
+        <p className="eyebrow">BOOK ONLINE</p>
+        <h2 id="planner-title" className="dialog-title" tabIndex={-1} ref={headingRef}>Book your <em>{selectedService.name.toLowerCase()}.</em></h2>
+        <p className="dialog-intro">Choose your treatment and a time that suits you. Booking is handled securely by Square.</p>
+        <div className="selected-treatment-line"><span>Your ritual</span><strong>{selectedService.name}</strong><button type="button" className="text-button" onClick={() => { setOnSquare(false); goToStep(0); }}>Change</button></div>
+        <SquareFrame page={selectedService} />
+      </div>
+    );
+  }
+
   return (
     <div className="planner-content">
       <p className="eyebrow">YOUR MOMENT OF CARE</p>
@@ -253,7 +274,7 @@ export default function AppointmentPlanner({ initialService: requestedService, s
         {error && <p className="form-error" role="alert">{error}</p>}
         <div className="planner-navigation">
           {step > 0 && <button type="button" className="text-button planner-back" onClick={() => goToStep(step - 1)}><ArrowLeft size={15} />Back</button>}
-          <button type="submit" className="button button-primary">{step === 2 ? 'Save my appointment plan' : 'Continue'}<ArrowRight size={16} /></button>
+          <button type="submit" className="button button-primary">{step === 2 ? 'Save my appointment plan' : step === 0 && booksOnSquare(selectedService) ? 'Continue to booking' : 'Continue'}<ArrowRight size={16} /></button>
         </div>
         <p className="planner-disclaimer">A personal planner, not a live booking service. No request is sent and no payment is taken.</p>
       </form>

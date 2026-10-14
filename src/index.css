@@ -643,6 +643,7 @@ svg { flex-shrink: 0; }
 .square-dialog { max-width: 880px; }
 .square-booking { padding: 44px 40px 28px; }
 .square-booking-heading { margin-bottom: 20px; }
+.planner-square .selected-treatment-line { margin: 18px 0 16px; }
 .square-booking-heading .eyebrow { margin-bottom: 14px; font-size: 12px; }
 .square-booking-frame { display: block; width: 100%; height: min(72dvh, 760px); min-height: 500px; border: 1px solid #e3d6c7; border-radius: 6px; background: #fff; }
 .square-booking-fallback { margin-top: 16px; font-size: 14px; color: #7a6655; text-align: center; }
