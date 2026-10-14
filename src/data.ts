@@ -1,19 +1,4 @@
-import { asset } from './paths';
 import { findServicePage } from './servicePages';
-export type ServiceId = 'facials' | 'massage' | 'head-spa';
-
-export type Service = {
-  id: ServiceId;
-  name: string;
-  eyebrow: string;
-  caption: string;
-  title: string;
-  description: string;
-  image: string;
-  alt: string;
-  experience: string[];
-  note: string;
-};
 
 /** Studio contact details, as published on the studio's Wix site. Keep index.html's JSON-LD in sync. */
 export const studio = {
@@ -28,61 +13,6 @@ export const studio = {
     { days: 'Sunday', time: 'Closed' },
   ],
 };
-
-export const services: Service[] = [
-  {
-    id: 'facials',
-    name: 'Facials',
-    eyebrow: 'SKIN, REIMAGINED',
-    caption: 'Your skin, beautifully refreshed.',
-    title: 'A fresh start for your skin.',
-    description:
-      'A moment to reset, with your skin at the center. Explore a facial ritual that pairs thoughtful skincare with the simple pleasure of being cared for.',
-    image: asset('images/facial.jpg'),
-    alt: 'A woman relaxing as a creamy facial mask is gently applied with a brush',
-    experience: [
-      'A conversation about your skin and goals',
-      'Cleansing and care suited to your skin',
-      'A soothing, nourishing finish',
-    ],
-    note: 'Your treatment, duration, and pricing are confirmed with the studio before your visit.',
-  },
-  {
-    id: 'massage',
-    name: 'Massage',
-    eyebrow: 'BODY, AT EASE',
-    caption: 'Release the day. Return to yourself.',
-    title: 'Let the outside world wait.',
-    description:
-      'Trade the everyday rush for a slower rhythm. A restorative massage experience creates space to relax, unwind, and reconnect with your body.',
-    image:
-      asset('images/massage.jpg'),
-    alt: 'A therapist gently massaging a back in a warm, peaceful spa setting',
-    experience: [
-      'Time to discuss your comfort and preferences',
-      'An approach tailored to your needs',
-      'An unhurried moment of relaxation',
-    ],
-    note: 'Please discuss suitability with your provider. Treatment options, duration, and pricing are confirmed by the studio.',
-  },
-  {
-    id: 'head-spa',
-    name: 'Head Spa',
-    eyebrow: 'A QUIETER STATE OF MIND',
-    caption: 'A clear mind starts at the crown.',
-    title: 'Clear your head. Find your calm.',
-    description:
-      'A little less noise. A little more stillness. Discover a sensory scalp-care ritual that invites you to switch off and enjoy a deeply relaxing pause.',
-    image: asset('images/head-spa.jpg'),
-    alt: 'A woman enjoying a gentle scalp massage and hair wash at a head spa',
-    experience: [
-      'A conversation about your scalp and hair',
-      'Gentle cleansing and scalp-focused care',
-      'A soothing massage and time to unwind',
-    ],
-    note: 'The studio will confirm the ritual, duration, pricing, and any preparation before your visit.',
-  },
-];
 
 export const faqs = [
   {

@@ -31,6 +31,8 @@ export type ServicePage = {
   tagline: string;
   intro: string[];
   image?: { src: string; alt: string };
+  /** The home page tile: photo, alt text, and a one-line caption. */
+  tile: { src: string; alt: string; caption: string };
   groups: MenuGroup[];
   notes?: string[];
   related: string[];
@@ -39,6 +41,7 @@ export type ServicePage = {
 export const servicePages: ServicePage[] = [
   {
     slug: 'massage',
+    tile: { src: asset('images/massage.jpg'), alt: "A therapist gently massaging a back in a warm, peaceful spa setting", caption: 'Release the day. Return to yourself.' },
     name: 'Massage Therapy',
     blurb: 'Swedish, deep tissue, and focused relief',
     title: "Massage Therapy in Prospect, CT | Stacy's Esthetics",
@@ -74,6 +77,7 @@ export const servicePages: ServicePage[] = [
   },
   {
     slug: 'facials',
+    tile: { src: asset('images/facial.jpg'), alt: "A woman relaxing as a creamy facial mask is gently applied with a brush", caption: 'Your skin, beautifully refreshed.' },
     name: 'Facials',
     blurb: 'Custom facials and microneedling',
     title: "Facials & Microneedling in Prospect, CT | Stacy's Esthetics",
@@ -117,6 +121,7 @@ export const servicePages: ServicePage[] = [
   },
   {
     slug: 'head-spa',
+    tile: { src: asset('images/head-spa.jpg'), alt: "A woman enjoying a gentle scalp massage and hair wash at a head spa", caption: 'A clear mind starts at the crown.' },
     name: 'Head Spa & Detox',
     blurb: 'Head spa rituals, sauna, and detox',
     title: "Head Spa in Prospect, CT | Stacy's Esthetics",
@@ -147,6 +152,8 @@ export const servicePages: ServicePage[] = [
   },
   {
     slug: 'body-contouring',
+    tile: { src: asset('images/body-contouring.jpg'), alt: "A therapist sculpting the leg with a wooden roller during a wood therapy session", caption: 'Shape, tone, and define.' },
+    image: { src: asset('images/body-contouring.jpg'), alt: "A therapist sculpting the leg with a wooden roller during a wood therapy session" },
     name: 'Body Contouring',
     blurb: 'Sculpting packages and mesotherapy',
     title: "Body Contouring in Prospect, CT | Stacy's Esthetics",
@@ -202,6 +209,8 @@ export const servicePages: ServicePage[] = [
   },
   {
     slug: 'post-op-recovery',
+    tile: { src: asset('images/post-op-recovery.jpg'), alt: "A therapist gently massaging a client's arm on soft cream linens", caption: 'Gentle care for your recovery.' },
+    image: { src: asset('images/post-op-recovery.jpg'), alt: "A therapist gently massaging a client's arm on soft cream linens" },
     name: 'Post-Op Recovery',
     blurb: 'Lymphatic drainage after surgery',
     title: "Post-Op Lymphatic Drainage in Prospect, CT | Stacy's Esthetics",
@@ -234,6 +243,8 @@ export const servicePages: ServicePage[] = [
   },
   {
     slug: 'laser-hair-removal',
+    tile: { src: asset('images/laser-hair-removal.jpg'), alt: "A cosmetologist performing laser hair removal on a client's leg in a warm spa", caption: 'Smooth skin that lasts.' },
+    image: { src: asset('images/laser-hair-removal.jpg'), alt: "A cosmetologist performing laser hair removal on a client's leg in a warm spa" },
     name: 'Laser Hair Removal',
     blurb: 'Smooth, long-lasting results',
     title: "Laser Hair Removal in Prospect, CT | Stacy's Esthetics",
@@ -260,6 +271,8 @@ export const servicePages: ServicePage[] = [
   },
   {
     slug: 'waxing',
+    tile: { src: asset('images/waxing.jpg'), alt: "A wax strip being smoothed onto a leg in soft natural light", caption: 'Smooth, in just minutes.' },
+    image: { src: asset('images/waxing.jpg'), alt: "A wax strip being smoothed onto a leg in soft natural light" },
     name: 'Waxing',
     blurb: 'Brows, underarms, Brazilian, and legs',
     title: "Waxing in Prospect, CT | Stacy's Esthetics",

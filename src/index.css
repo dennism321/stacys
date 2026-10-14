@@ -123,7 +123,10 @@ svg { flex-shrink: 0; }
 .section-heading .eyebrow { margin-bottom: 13px; font-size: 9px; }
 .section-title { font-family: var(--font-serif); font-size: 49px; font-weight: 400; line-height: 1.13; letter-spacing: -1.2px; }
 .heading-rule { display: block; width: 38px; height: 1px; background: #aa9380; margin: 20px auto 0; }
-.services-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 26px; margin-top: 34px; }
+.services-grid { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 40px 26px; margin-top: 34px; }
+/* Seven tiles: four across, then three centered beneath. */
+.service-tile { grid-column: span 2; }
+.service-tile:nth-child(5) { grid-column: 2 / span 2; }
 .service-link { display: block; width: 100%; text-align: left; border: 0; background: transparent; padding: 0; }
 .service-image-wrap { display: block; overflow: hidden; width: 100%; aspect-ratio: 0.945; background: #e7dbcf; }
 .service-image-wrap img { height: 100%; filter: saturate(0.77); transition: transform 750ms cubic-bezier(0.22, 1, 0.36, 1), filter 750ms; }
@@ -131,7 +134,7 @@ svg { flex-shrink: 0; }
 .service-image-massage img { object-position: 50% 58%; }
 .service-image-head-spa img { object-position: 50% 55%; }
 .service-name-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 19px; }
-.service-name { font-family: var(--font-serif); font-size: 29px; font-weight: 400; line-height: 1.2; letter-spacing: -0.5px; }
+.service-name { font-family: var(--font-serif); font-size: 26px; font-weight: 400; line-height: 1.2; letter-spacing: -0.5px; }
 .service-name-row svg { color: #9b806a; margin-right: 2px; transition: transform 250ms; }
 .service-link:hover .service-name-row svg { transform: translate(3px, -3px); }
 .service-caption { display: block; margin-top: 9px; color: var(--muted); font-size: 11px; line-height: 1.7; letter-spacing: 0.006em; }
@@ -353,7 +356,10 @@ svg { flex-shrink: 0; }
   .hero-actions { gap: 18px; }
   .hero-description { font-size: 11px; }
   .hero::after { background: linear-gradient(90deg, rgba(244,237,227,0.97), rgba(244,237,227,0.84) 29%, rgba(244,237,227,0.36) 49%, transparent 78%); }
-  .services-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 35px 25px; }
+  .services-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 35px 25px; }
+  /* Two across, with the last tile centered. */
+  .service-tile:nth-child(5) { grid-column: span 2; }
+  .service-tile:nth-child(7) { grid-column: 2 / span 2; }
   .service-image-wrap { aspect-ratio: 1.06; }
   .service-name { font-size: 31px; }
   .service-caption { font-size: 11px; }

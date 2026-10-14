@@ -9,11 +9,10 @@ import { MobileServicesMenu, ServicesMenu } from './components/ServicesMenu';
 import ServicePageView from './components/ServicePageView';
 import { BASE, asset, homeSection, servicePath } from './paths';
 import { servicePages, type ServicePage } from './servicePages';
-import { PolicyDetails, StudioDetails, TreatmentDetails } from './components/StudioDialogs';
-import { DRAFT_KEY, faqs, readDraft, services, studio, type AppointmentDraft, type ServiceId } from './data';
+import { PolicyDetails, StudioDetails } from './components/StudioDialogs';
+import { DRAFT_KEY, faqs, readDraft, studio, type AppointmentDraft } from './data';
 
 type OpenDialog =
-  | { type: 'treatment'; serviceId: ServiceId }
   | { type: 'planner'; serviceId?: string }
   | { type: 'policies'; tab: 'booking' | 'privacy' }
   | { type: 'studio' }
@@ -183,13 +182,13 @@ export default function App({ page }: { page?: ServicePage }) {
                   <span className="heading-rule" aria-hidden="true" />
                 </Reveal>
                 <div className="services-grid">
-                  {services.map((service, index) => (
-                    <Reveal key={service.id} delay={index * 0.07}>
-                      <button type="button" className="service-link" aria-label={`Explore ${service.name}`} onClick={() => showDialog({ type: 'treatment', serviceId: service.id })}>
-                        <span className={`service-image-wrap service-image-${service.id}`}><img src={service.image} alt={service.alt} loading="lazy" width="600" height="700" /></span>
-                        <span className="service-name-row"><span className="service-name">{service.name}</span><ArrowUpRight size={22} strokeWidth={1.1} /></span>
-                        <span className="service-caption">{service.caption}</span>
-                      </button>
+                  {servicePages.map((item, index) => (
+                    <Reveal key={item.slug} className="service-tile" delay={(index % 4) * 0.07}>
+                      <a className="service-link" href={servicePath(item.slug)}>
+                        <span className={`service-image-wrap service-image-${item.slug}`}><img src={item.tile.src} alt={item.tile.alt} loading="lazy" width="600" height="700" /></span>
+                        <span className="service-name-row"><span className="service-name">{item.name}</span><ArrowUpRight size={22} strokeWidth={1.1} aria-hidden="true" /></span>
+                        <span className="service-caption">{item.tile.caption}</span>
+                      </a>
                     </Reveal>
                   ))}
                 </div>
@@ -262,7 +261,6 @@ export default function App({ page }: { page?: ServicePage }) {
       <AnimatePresence mode="wait" onExitComplete={() => {
         if (!dialog) dialogTriggerRef.current?.focus({ preventScroll: true });
       }}>
-        {dialog?.type === 'treatment' && <Dialog key="treatment" onClose={closeDialog} labelledBy="treatment-title" className="treatment-dialog"><TreatmentDetails service={services.find((service) => service.id === dialog.serviceId)!} onChoose={openPlanner} /></Dialog>}
         {dialog?.type === 'planner' && <Dialog key="planner" onClose={closeDialog} labelledBy="planner-title" className="planner-dialog"><AppointmentPlanner initialService={dialog.serviceId} savedDraft={savedDraft} onSave={setSavedDraft} onDelete={deleteDraft} /></Dialog>}
         {dialog?.type === 'policies' && <Dialog key="policies" onClose={closeDialog} labelledBy="policies-title" className="info-dialog"><PolicyDetails initialTab={dialog.tab} hasDraft={Boolean(savedDraft)} onDelete={deleteDraft} /></Dialog>}
         {dialog?.type === 'studio' && <Dialog key="studio" onClose={closeDialog} labelledBy="studio-title" className="info-dialog"><StudioDetails onClose={closeDialog} /></Dialog>}

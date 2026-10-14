@@ -1,25 +1,7 @@
 import { useState, type KeyboardEvent } from 'react';
-import { ArrowRight, ArrowUpRight } from 'lucide-react';
-import { studio, type Service, type ServiceId } from '../data';
-
-export function TreatmentDetails({ service, onChoose }: { service: Service; onChoose: (id: ServiceId) => void }) {
-  return (
-    <div className="treatment-detail">
-      <div className="treatment-detail-image"><img src={service.image} alt={service.alt} /></div>
-      <div className="treatment-detail-copy">
-        <p className="eyebrow">{service.eyebrow}</p>
-        <h2 id="treatment-title" className="dialog-title">{service.title}</h2>
-        <p className="dialog-intro">{service.description}</p>
-        <p className="detail-label">YOUR EXPERIENCE</p>
-        <ul className="experience-list">{service.experience.map((item) => <li key={item}>{item}</li>)}</ul>
-        <p className="treatment-note">{service.note}</p>
-        <button type="button" className="button button-primary" onClick={() => onChoose(service.id)}>
-          Choose this treatment<ArrowRight size={16} />
-        </button>
-      </div>
-    </div>
-  );
-}
+import { ArrowUpRight } from 'lucide-react';
+import { studio } from '../data';
+import { homeSection } from '../paths';
 
 export function PolicyDetails({ initialTab, hasDraft, onDelete }: {
   initialTab: 'booking' | 'privacy';
@@ -91,7 +73,7 @@ export function StudioDetails({ onClose }: { onClose: () => void }) {
         <div><dt>Phone</dt><dd><a href={studio.phoneHref}>{studio.phone}</a></dd></div>
       </dl>
       <p className="form-note">Please confirm your appointment with the studio before your visit. Photography on this website is illustrative.</p>
-      <a className="button button-primary" href="#services" onClick={onClose}>Find your ritual<ArrowUpRight size={16} /></a>
+      <a className="button button-primary" href={homeSection('services')} onClick={onClose}>Find your ritual<ArrowUpRight size={16} /></a>
     </div>
   );
 }
