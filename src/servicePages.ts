@@ -43,6 +43,11 @@ export type ServicePage = {
 export const servicePages: ServicePage[] = [
   {
     slug: 'massage',
+    squareBooking: {
+      // From the studio's Square Appointments embed code (widget ilht6vhelju99k, location L2A59ABR9VW2A).
+      widgetUrl: 'https://app.squareup.com/appointments/buyer/widget/ilht6vhelju99k/L2A59ABR9VW2A',
+      bookUrl: 'https://app.squareup.com/appointments/book/ilht6vhelju99k/L2A59ABR9VW2A/start',
+    },
     tile: { src: asset('images/massage.jpg'), alt: "A therapist gently massaging a back in a warm, peaceful spa setting", caption: 'Release the day. Return to yourself.' },
     name: 'Massage Therapy',
     blurb: 'Swedish, deep tissue, and focused relief',
