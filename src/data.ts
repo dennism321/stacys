@@ -14,6 +14,23 @@ export const studio = {
   ],
 };
 
+/**
+ * Google rating and highlights from the studio's Google reviews. The highlights are short summaries
+ * in our own words, not quotes; reviewers are shown by first name only. Update the count as reviews grow.
+ */
+export const googleReviews = {
+  rating: 5.0,
+  count: 33,
+  url: 'https://maps.google.com/?cid=1480761830549486181',
+  highlights: [
+    { name: 'Janio', service: 'Deep cleansing facial', summary: 'A professional, knowledgeable team who explained every step of a deep cleansing facial and made the whole visit comfortable.' },
+    { name: 'Yasmin', service: 'Esthetician care', summary: 'Exceptional, attentive service that left her relaxed and fully informed, and in her view the best in Connecticut.' },
+    { name: 'Virginia', service: 'Facials & massage', summary: 'Facials that renewed her skin and wonderfully relaxing massages. She highly recommends the studio.' },
+    { name: 'Yajaira', service: 'Returning client', summary: 'A favorite place she keeps coming back to, for consistently excellent service and real expertise.' },
+    { name: 'Toan', service: 'Studio visit', summary: 'An amazing studio that is spotless and thoroughly professional.' },
+  ],
+};
+
 export const faqs = [
   {
     question: 'Which treatment is right for me?',

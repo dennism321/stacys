@@ -1,7 +1,9 @@
-import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { ArrowRight, ArrowUp, ArrowUpRight, ChevronDown, Menu, X } from 'lucide-react';
 import Dialog from './components/Dialog';
+import Reveal from './components/Reveal';
+import ReviewsSection from './components/ReviewsSection';
 import AppointmentPlanner from './components/AppointmentPlanner';
 import BrandLogo from './components/BrandLogo';
 import SocialLinks from './components/SocialLinks';
@@ -19,19 +21,6 @@ type OpenDialog =
   | { type: 'policies'; tab: 'booking' | 'privacy' }
   | { type: 'studio' }
   | null;
-
-function Reveal({ children, className = '', delay = 0 }: { children: ReactNode; className?: string; delay?: number }) {
-  const reduceMotion = useReducedMotion();
-  return (
-    <motion.div
-      className={className}
-      initial={reduceMotion ? false : { opacity: 0, y: 22 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.08 }}
-      transition={{ duration: reduceMotion ? 0 : 0.75, delay, ease: [0.22, 1, 0.36, 1] }}
-    >{children}</motion.div>
-  );
-}
 
 function Botanical({ className = '' }: { className?: string }) {
   return (
@@ -197,6 +186,8 @@ export default function App({ page }: { page?: ServicePage }) {
                 <Reveal className="services-footnote"><p>Every face, every body, every story is different. Your care should be, too.</p></Reveal>
               </div>
             </section>
+
+            <ReviewsSection />
 
             <section id="philosophy" className="philosophy-section" aria-labelledby="philosophy-title">
               <div className="page-width philosophy-grid">
