@@ -72,8 +72,9 @@ svg { flex-shrink: 0; }
 .brand-mark { display: block; width: 128px; height: auto; transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1); }
 .brand-name { margin-top: 2px; font-family: 'Great Vibes', cursive; font-size: 30px; font-weight: 400; line-height: 1.1; white-space: nowrap; }
 .brand-tagline { margin-top: 5px; margin-right: -0.3em; font-size: 8px; font-weight: 450; letter-spacing: 0.3em; line-height: 1.2; text-transform: uppercase; white-space: nowrap; color: #000000; }
-.brand-logo-footer { align-items: flex-start; }
-.brand-logo-footer .brand-mark { width: 146px; margin-left: -6px; }
+/* The mark and tagline center on the name; the whole lockup stays left-aligned in the footer. */
+.brand-logo-footer { display: inline-flex; align-items: center; }
+.brand-logo-footer .brand-mark { width: 146px; }
 .brand-logo-footer .brand-name { font-size: 53px; color: #ffffff; }
 .brand-logo-footer .brand-tagline { font-size: 13px; color: #ffffff; }
 .desktop-nav a { position: relative; padding: 12px 0; font-size: 15px; letter-spacing: 0.015em; }
