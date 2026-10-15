@@ -199,14 +199,12 @@ svg { flex-shrink: 0; }
 .footer-label { font-size: 12px; letter-spacing: 0.2em; color: #c4ac96; margin-bottom: 4px; }
 .footer-nav a, .footer-nav button { display: inline-flex; align-items: center; gap: 8px; background: transparent; border: 0; padding: 1px 0; font-size: 14px; color: #e4d7c9; transition: color 180ms; }
 .footer-nav a:hover, .footer-nav button:hover { color: white; text-decoration: underline; text-underline-offset: 4px; }
-.footer-bottom { border-top: 1px solid #705d4e; display: flex; align-items: center; gap: 30px; padding: 23px 0; color: #c7b5a4; font-size: 12px; line-height: 1.7; }
-.footer-bottom button { padding: 0; }
-/* Credit sits on its own centered line under the rest of the footer's bottom row. */
-.footer-bottom { flex-wrap: wrap; }
-.footer-credit { order: 10; flex-basis: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 6px; color: inherit; transition: color 180ms; }
+/* Copyright left, TechAthos credit centered, back-to-top right, all on one vertically centered row. */
+.footer-bottom { border-top: 1px solid #705d4e; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 20px 30px; padding: 23px 0; color: #c7b5a4; font-size: 12px; line-height: 1.7; }
+.footer-credit { justify-self: center; display: inline-flex; align-items: center; gap: 6px; color: inherit; transition: color 180ms; }
 .footer-credit img { width: 18px; height: 18px; padding: 2px; object-fit: contain; background: #000; }
 .footer-credit:hover { color: #fff; }
-.back-to-top { display: inline-flex; align-items: center; gap: 12px; margin-left: auto; }
+.back-to-top { display: inline-flex; align-items: center; gap: 12px; justify-self: end; }
 
 /* Dialogs share one accessible, keyboard-contained presentation. */
 .dialog-backdrop { position: fixed; inset: 0; z-index: 70; display: flex; align-items: center; justify-content: center; padding: 32px; background: rgba(49, 39, 30, 0.48); backdrop-filter: blur(5px); }
@@ -471,9 +469,10 @@ svg { flex-shrink: 0; }
   .footer-nav { gap: 12px; }
   .footer-nav a, .footer-nav button { font-size: 14px; }
   .footer-label { font-size: 12px; }
-  .footer-bottom { display: flex; flex-wrap: wrap; gap: 15px 20px; padding: 23px 0; font-size: 12px; }
-  .footer-bottom > p { width: 100%; }
-  .footer-bottom .back-to-top { margin-left: auto; }
+  /* Phones: copyright on its own line, then the credit and back-to-top side by side. */
+  .footer-bottom { grid-template-columns: 1fr auto; gap: 15px 20px; padding: 23px 0; font-size: 12px; }
+  .footer-bottom > p { grid-column: 1 / -1; }
+  .footer-credit { justify-self: start; }
   .dialog-backdrop { padding: 17px; }
   .dialog { max-height: calc(100dvh - 34px); }
   .treatment-dialog { max-width: 510px; }
