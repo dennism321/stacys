@@ -201,6 +201,9 @@ svg { flex-shrink: 0; }
 .footer-nav a:hover, .footer-nav button:hover { color: white; text-decoration: underline; text-underline-offset: 4px; }
 .footer-bottom { border-top: 1px solid #705d4e; display: flex; align-items: center; gap: 30px; padding: 23px 0; color: #c7b5a4; font-size: 12px; line-height: 1.7; }
 .footer-bottom button { padding: 0; }
+.footer-credit { display: inline-flex; align-items: center; gap: 6px; color: inherit; transition: color 180ms; }
+.footer-credit img { width: 13px; height: 16px; }
+.footer-credit:hover { color: #fff; }
 .back-to-top { display: inline-flex; align-items: center; gap: 12px; margin-left: auto; }
 
 /* Dialogs share one accessible, keyboard-contained presentation. */
