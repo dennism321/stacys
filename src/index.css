@@ -204,7 +204,7 @@ svg { flex-shrink: 0; }
 /* Credit sits on its own centered line under the rest of the footer's bottom row. */
 .footer-bottom { flex-wrap: wrap; }
 .footer-credit { order: 10; flex-basis: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 6px; color: inherit; transition: color 180ms; }
-.footer-credit img { width: 13px; height: 16px; }
+.footer-credit img { width: 18px; height: 18px; padding: 2px; object-fit: contain; background: #000; }
 .footer-credit:hover { color: #fff; }
 .back-to-top { display: inline-flex; align-items: center; gap: 12px; margin-left: auto; }
 
