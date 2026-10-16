@@ -35,17 +35,12 @@ export const faqs = [
   {
     question: 'Which treatment is right for me?',
     answer:
-      'Start with what you need most: skin-focused care, time to unwind, a lip consultation, or a soothing scalp ritual. Explore each treatment above, then use the appointment planner to note your preference. Your provider should help confirm the right fit before treatment.',
+      'Start with what you need most: skin-focused care, time to unwind, body sculpting, or a soothing scalp ritual. Explore each treatment above, then book online or call us, and your provider will help confirm the right fit before treatment.',
   },
   {
     question: 'What should I know before my first visit?',
     answer:
       'Ask your provider about preparation, timing, and aftercare for your chosen treatment. Share any relevant health concerns privately with your provider, rather than through the online planner. Treatment details and pricing should be confirmed before your visit.',
-  },
-  {
-    question: 'Do lip injections require a consultation?',
-    answer:
-      'Yes. Lip injections are a medical procedure. An appropriately licensed medical provider must assess your suitability, discuss expected outcomes, risks and alternatives, and obtain informed consent before any treatment. An appointment preference is not medical clearance.',
   },
   {
     question: 'What are your booking and cancellation policies?',
