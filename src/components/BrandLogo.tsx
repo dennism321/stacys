@@ -15,7 +15,7 @@ export default function BrandLogo({ variant = 'header', className = '' }: BrandL
 
   return (
     <span className={`brand-logo brand-logo-${variant} ${className}`}>
-      <img className="brand-mark" src={mark} alt="" width="600" height="377" decoding="async" />
+      <img className="brand-mark" src={mark} srcSet={`${mark.replace('.webp', '-360.webp')} 360w, ${mark} 600w`} sizes="180px" alt="" width="600" height="377" decoding="async" />
       <span className="brand-name">Stacy's Esthetics</span>
       <span className="brand-tagline">Fall in love with yourself</span>
     </span>

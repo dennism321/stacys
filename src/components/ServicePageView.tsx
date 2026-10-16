@@ -1,6 +1,6 @@
 import { ArrowRight, ArrowUpRight, Phone } from 'lucide-react';
 import { studio } from '../data';
-import { BASE, homeSection, servicePath } from '../paths';
+import { BASE, homeSection, photoSrcSet, servicePath } from '../paths';
 import { findServicePage, type MenuItem, type ServicePage } from '../servicePages';
 
 function MenuItemRow({ item }: { item: MenuItem }) {
@@ -53,7 +53,7 @@ export default function ServicePageView({ page, onBook }: { page: ServicePage; o
           </div>
           {page.image && (
             <div className="sp-hero-image">
-              <img src={page.image.src} alt={page.image.alt} width="640" height="760" fetchPriority="high" />
+              <img src={page.image.src} srcSet={photoSrcSet(page.image.src)} sizes="(max-width: 767px) 100vw, 45vw" alt={page.image.alt} width="640" height="760" fetchPriority="high" />
             </div>
           )}
         </div>

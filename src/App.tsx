@@ -10,7 +10,7 @@ import SocialLinks from './components/SocialLinks';
 import { MobileServicesMenu, ServicesMenu } from './components/ServicesMenu';
 import ServicePageView from './components/ServicePageView';
 import SquareBooking from './components/SquareBooking';
-import { BASE, asset, homeSection, servicePath } from './paths';
+import { BASE, asset, homeSection, photoSrcSet, servicePath } from './paths';
 import { servicePages, type ServicePage } from './servicePages';
 import { PolicyDetails, StudioDetails } from './components/StudioDialogs';
 import { DRAFT_KEY, faqs, readDraft, studio, type AppointmentDraft } from './data';
@@ -116,7 +116,7 @@ export default function App({ page }: { page?: ServicePage }) {
                 <a href={section('visit')}>Your Visit</a>
               </nav>
             </div>
-            <a href={page ? BASE : '#home'} className="brand-pendant" aria-label={page ? "Stacy's Esthetics, fall in love with yourself. Home" : "Stacy's Esthetics, fall in love with yourself. Back to top"} onClick={() => setMenuOpen(false)}>
+            <a href={page ? BASE : '#home'} className="brand-pendant" onClick={() => setMenuOpen(false)}>
               <BrandLogo />
             </a>
             <div className="header-side header-right">
@@ -147,7 +147,7 @@ export default function App({ page }: { page?: ServicePage }) {
             <>
             <section id="home" className="hero" aria-labelledby="hero-title">
               {/* Phones get the full portrait clip; wider screens get a squarer crop shown on the right. */}
-              <motion.video ref={heroVideoRef} className="hero-image hero-video" poster={asset('images/headspa2-desktop-poster.jpg')} autoPlay muted loop playsInline preload="auto" aria-hidden="true" initial={{ scale: reduceMotion ? 1 : 1.045 }} animate={{ scale: 1 }} transition={{ duration: reduceMotion ? 0 : 2.2, ease: [0.22, 1, 0.36, 1] }}>
+              <motion.video ref={heroVideoRef} className="hero-image hero-video" poster={asset('images/headspa2-desktop-poster.webp')} autoPlay muted loop playsInline preload="auto" aria-hidden="true" initial={{ scale: reduceMotion ? 1 : 1.045 }} animate={{ scale: 1 }} transition={{ duration: reduceMotion ? 0 : 2.2, ease: [0.22, 1, 0.36, 1] }}>
                 <source media="(max-width: 767px)" src={asset('images/headspa2-phone.mp4')} type="video/mp4" />
                 <source src={asset('images/headspa2-desktop.mp4')} type="video/mp4" />
               </motion.video>
@@ -176,7 +176,7 @@ export default function App({ page }: { page?: ServicePage }) {
                   {servicePages.map((item, index) => (
                     <Reveal key={item.slug} className="service-tile" delay={(index % 4) * 0.07}>
                       <a className="service-link" href={servicePath(item.slug)}>
-                        <span className={`service-image-wrap service-image-${item.slug}`}><img src={item.tile.src} alt={item.tile.alt} loading="lazy" width="600" height="700" /></span>
+                        <span className={`service-image-wrap service-image-${item.slug}`}><img src={item.tile.src} srcSet={photoSrcSet(item.tile.src)} sizes="(max-width: 1100px) 50vw, 25vw" alt={item.tile.alt} loading="lazy" width="600" height="700" /></span>
                         <span className="service-name-row"><span className="service-name">{item.name}</span><ArrowUpRight size={22} strokeWidth={1.1} aria-hidden="true" /></span>
                         <span className="service-caption">{item.tile.caption}</span>
                       </a>
@@ -191,7 +191,7 @@ export default function App({ page }: { page?: ServicePage }) {
 
             <section id="philosophy" className="philosophy-section" aria-labelledby="philosophy-title">
               <div className="page-width philosophy-grid">
-                <Reveal className="philosophy-image-wrap"><img src={asset('images/our-space.jpg')} alt="Warm sunlight falling across a linen-covered treatment bed in a serene beige spa" loading="lazy" width="640" height="800" /></Reveal>
+                <Reveal className="philosophy-image-wrap"><img src={asset('images/our-space.webp')} srcSet={photoSrcSet(asset('images/our-space.webp'), 912)} sizes="(max-width: 767px) 100vw, 45vw" alt="Warm sunlight falling across a linen-covered treatment bed in a serene beige spa" loading="lazy" width="640" height="800" /></Reveal>
                 <Reveal className="philosophy-copy" delay={0.12}>
                   <p className="eyebrow">A THOUGHTFUL APPROACH TO YOU</p>
                   <h2 id="philosophy-title" className="section-title">More than a treatment.<br />A moment to <em>come<br className="philosophy-break" /> back to you.</em></h2>
@@ -241,7 +241,7 @@ export default function App({ page }: { page?: ServicePage }) {
         <footer className="site-footer">
           <div className="page-width">
             <div className="footer-top">
-              <div className="footer-brand"><a href={page ? BASE : '#home'} aria-label={page ? "Stacy's Esthetics home" : "Stacy's Esthetics, back to top"}><BrandLogo variant="footer" /></a><p>Beauty in balance. Care without hurry.</p><SocialLinks /></div>
+              <div className="footer-brand"><a href={page ? BASE : '#home'}><BrandLogo variant="footer" /></a><p>Beauty in balance. Care without hurry.</p><SocialLinks /></div>
               <nav className="footer-nav" aria-label="Services"><p className="footer-label">SERVICES</p>{servicePages.map((item) => <a key={item.slug} href={servicePath(item.slug)}>{item.name}</a>)}</nav>
               <nav className="footer-nav" aria-label="Studio information"><p className="footer-label">A LITTLE MORE</p><button type="button" onClick={() => showDialog({ type: 'studio' })}>Studio & contact<ArrowUpRight size={13} /></button><button type="button" onClick={() => showDialog({ type: 'policies', tab: 'booking' })}>Booking policies</button><button type="button" onClick={() => openPlanner()}>Your appointment plan</button></nav>
               <address className="footer-visit"><p className="footer-label">VISIT US</p><a href={studio.mapsHref} target="_blank" rel="noopener noreferrer">{studio.street}<br />{studio.locality}</a><a href={studio.phoneHref}>{studio.phone}</a><dl className="footer-hours">{studio.hours.map((row) => <div key={row.days} style={{ display: 'contents' }}><dt>{row.days}</dt><dd>{row.time}</dd></div>)}</dl></address>

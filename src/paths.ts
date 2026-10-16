@@ -9,3 +9,6 @@ export const asset = (path: string) => `${BASE}${path}`;
 export const homeSection = (id: string) => `${BASE}#${id}`;
 
 export const servicePath = (slug: string) => `${BASE}${slug}/`;
+
+/** srcset for a photo that also has a 640px "-640.webp" version next to it. */
+export const photoSrcSet = (src: string, fullWidth = 800) => `${src.replace(/\.webp$/, '-640.webp')} 640w, ${src} ${fullWidth}w`;

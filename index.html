@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#faf7f2" />
     <title>Stacy's Esthetics | Head Spa, Facials &amp; Massage in Prospect, CT</title>
-    <meta name="description" content="Japanese-style head spa water rituals, facials, and massage at Stacy's Esthetics in Prospect, CT. Unhurried, thoughtful care at 26 Union City Rd. Plan your visit." />
+    <meta name="description" content="Japanese-style head spa, facials, massage, and body contouring at Stacy's Esthetics in Prospect, CT. Unhurried, thoughtful care. Book online today." />
     <meta name="robots" content="index, follow, max-image-preview:large" />
-    <!-- Update the canonical, og:url, og:image, and JSON-LD urls if the site moves to a custom domain. -->
+    <!-- If the domain changes, update the canonical, og:url, og:image, and JSON-LD urls (and SITE_URL in src/paths.ts). -->
     <link rel="canonical" href="https://stacyesthetics.com/" />
     <link rel="icon" type="image/svg+xml" href="%BASE_URL%favicon.svg" />
 
@@ -50,7 +50,9 @@
           { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "09:30", "closes": "18:00" },
           { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:30", "closes": "16:00" }
         ],
-        "hasMap": "https://www.google.com/maps/search/?api=1&query=26+Union+City+Rd%2C+Prospect%2C+CT+06712",
+        "geo": { "@type": "GeoCoordinates", "latitude": 41.5047897, "longitude": -72.9837645 },
+        "hasMap": "https://maps.google.com/?cid=1480761830549486181",
+        "priceRange": "$$",
         "areaServed": "Prospect, CT",
         "sameAs": [
           "https://www.instagram.com/stacysesthetics/",
@@ -70,7 +72,10 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;450;500;550;600&family=Great+Vibes&display=swap" />
+    <!-- Load the fonts without blocking the first paint; text shows in a fallback font for a moment. -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;450;500;550;600&family=Great+Vibes&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;450;500;550;600&family=Great+Vibes&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;450;500;550;600&family=Great+Vibes&display=swap" /></noscript>
   </head>
   <body>
     <div id="root"></div>

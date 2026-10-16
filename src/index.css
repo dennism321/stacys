@@ -96,8 +96,8 @@ svg { flex-shrink: 0; }
 .services-menu-panel li a::after { display: none; }
 .services-menu-panel li a:hover, .services-menu-panel li a:focus-visible { background: #f1e6dc; }
 .services-menu-name { font-family: var(--font-serif); font-size: 19px; line-height: 1.15; color: #3a2e25; }
-.services-menu-blurb { font-size: 13px; color: #8c7764; letter-spacing: 0.01em; }
-.desktop-nav .services-menu-all { display: flex; align-items: center; justify-content: space-between; margin-top: 6px; padding: 12px 12px 6px; border-top: 1px solid #ebe0d4; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #8a6d57; }
+.services-menu-blurb { font-size: 13px; color: #76614f; letter-spacing: 0.01em; }
+.desktop-nav .services-menu-all { display: flex; align-items: center; justify-content: space-between; margin-top: 6px; padding: 12px 12px 6px; border-top: 1px solid #ebe0d4; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #7d604b; }
 .desktop-nav .services-menu-all::after { display: none; }
 @keyframes services-menu-in { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .services-menu-panel { animation: none; } }
@@ -305,7 +305,7 @@ svg { flex-shrink: 0; }
 .studio-details { border-top: 1px solid #ddcdbc; margin: 27px 0 20px; }
 .studio-details > div { display: flex; gap: 25px; padding: 18px 0; border-bottom: 1px solid #ddcdbc; }
 .studio-details dt { font-size: 14px; flex: 1; }
-.studio-details dd { font-size: 14px; color: #8c7764; text-align: right; line-height: 1.7; }
+.studio-details dd { font-size: 14px; color: #76614f; text-align: right; line-height: 1.7; }
 .studio-details dd span { display: block; }
 .studio-details dd a { color: inherit; text-decoration: underline; text-decoration-color: #d4c1ae; text-underline-offset: 3px; }
 .studio-details dd a:hover { color: #5d4a3c; }
@@ -553,7 +553,7 @@ svg { flex-shrink: 0; }
 .sp-hero { background: #f2ebe1; padding: 150px 0 72px; }
 .sp-hero-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 72px; align-items: center; }
 .sp-hero-text-only { grid-template-columns: minmax(0, 760px); }
-.breadcrumb ol { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 26px; padding: 0; list-style: none; font-size: 14px; color: #8c7764; }
+.breadcrumb ol { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 26px; padding: 0; list-style: none; font-size: 14px; color: #76614f; }
 .breadcrumb li + li::before { content: '/'; margin-right: 8px; color: #c4ad99; }
 .breadcrumb a { color: inherit; text-decoration: underline; text-decoration-color: #d4c1ae; text-underline-offset: 3px; }
 .breadcrumb a:hover { color: #3a2e25; }
@@ -571,7 +571,7 @@ svg { flex-shrink: 0; }
 .sp-group + .sp-group { margin-top: 64px; }
 .sp-group-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; padding-bottom: 14px; border-bottom: 1px solid #3a2e25; }
 .sp-group-heading h2 { font-family: var(--font-serif); font-size: 36px; font-weight: 400; line-height: 1.1; letter-spacing: -0.6px; }
-.sp-group-heading p { font-size: 15px; color: #8c7764; }
+.sp-group-heading p { font-size: 15px; color: #76614f; }
 .sp-items { margin: 0; padding: 0; list-style: none; }
 .sp-item { padding: 24px 0; border-bottom: 1px solid #e3d6c7; }
 .sp-item-head { display: flex; align-items: baseline; gap: 16px; }
@@ -579,12 +579,12 @@ svg { flex-shrink: 0; }
 .sp-item-head::after { content: ''; order: 1; flex: 1; border-bottom: 1px dotted #cdb8a5; transform: translateY(-5px); }
 .sp-item-head .sp-price { order: 2; }
 .sp-item-head.sp-no-price::after { display: none; }
-.sp-price { font-family: var(--font-serif); font-size: 23px; font-weight: 500; color: #8a6d57; white-space: nowrap; }
-.sp-meta { margin-top: 4px; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: #a08672; }
+.sp-price { font-family: var(--font-serif); font-size: 23px; font-weight: 500; color: #7d604b; white-space: nowrap; }
+.sp-meta { margin-top: 4px; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: #76614f; }
 .sp-description { max-width: 640px; margin-top: 10px; font-size: 16px; line-height: 1.8; color: #6f5d50; }
 .sp-packages { display: grid; gap: 8px; max-width: 460px; margin: 16px 0 0; padding: 0; list-style: none; }
 .sp-packages li { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 10px 16px; background: #f4ece3; border-radius: 8px; font-size: 16px; color: #5d4a3c; }
-.sp-packages small { display: block; margin-top: 2px; font-size: 14px; color: #8c7764; }
+.sp-packages small { display: block; margin-top: 2px; font-size: 14px; color: #76614f; }
 .sp-packages .sp-price { font-size: 20px; }
 .sp-items-compact .sp-item { padding: 15px 0; }
 .sp-items-compact .sp-item-head h3 { font-size: 20px; }
@@ -614,7 +614,7 @@ svg { flex-shrink: 0; }
 .sp-related-grid a { display: flex; flex-direction: column; gap: 10px; height: 100%; padding: 28px; background: #f2ebe1; border-radius: 10px; transition: background-color 200ms, transform 200ms; }
 .sp-related-grid a:hover { background: #ecdfd2; transform: translateY(-3px); }
 .sp-related-name { display: flex; align-items: center; justify-content: space-between; font-family: var(--font-serif); font-size: 26px; color: #3a2e25; }
-.sp-related-blurb { font-size: 15px; line-height: 1.7; color: #8c7764; }
+.sp-related-blurb { font-size: 15px; line-height: 1.7; color: #76614f; }
 
 @media (max-width: 900px) {
   .sp-hero { padding: 132px 0 56px; }
@@ -641,7 +641,7 @@ svg { flex-shrink: 0; }
 /* Booking form: text-only treatment options with a starting price */
 .treatment-option-text { padding: 13px 16px; margin-top: 7px; }
 .treatment-option-text .option-copy { flex: 1; }
-.option-price { font-family: var(--font-serif); font-size: 17px; color: #8a6d57; white-space: nowrap; }
+.option-price { font-family: var(--font-serif); font-size: 17px; color: #7d604b; white-space: nowrap; }
 .plan-summary dd span { display: block; }
 
 /* Square Appointments booking window (Facials page) */
@@ -672,9 +672,9 @@ svg { flex-shrink: 0; }
 .review-summary { flex: 1; font-family: var(--font-serif); font-size: 21px; line-height: 1.45; color: #3a2e25; }
 .review-byline { display: flex; flex-direction: column; gap: 2px; padding-top: 14px; border-top: 1px solid #ebe0d4; }
 .review-name { font-size: 15px; font-weight: 500; color: #3a2e25; }
-.review-service { font-size: 13px; color: #8c7764; }
+.review-service { font-size: 13px; color: #76614f; }
 .reviews-footer { display: flex; flex-direction: column; align-items: center; gap: 14px; margin-top: 38px; text-align: center; }
-.reviews-note { font-size: 13px; color: #8c7764; }
+.reviews-note { font-size: 13px; color: #76614f; }
 
 @media (max-width: 1100px) {
   .reviews-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
