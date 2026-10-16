@@ -1,8 +1,8 @@
 // Pre-render the home page and every service page into dist/, each with its own
-// title, description, canonical URL, sharing tags, and structured data. Also writes sitemap.xml.
+// title, description, canonical URL, sharing tags, and structured data. Also writes sitemap.xml and llms.txt.
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 
-const { render, servicePages, studio, SITE_URL } = await import("../dist-ssr/entry-server.js");
+const { render, faqs, googleReviews, serviceFaqs, servicePages, startingPrice, studio, SITE_URL } = await import("../dist-ssr/entry-server.js");
 const dist = new URL("../dist/", import.meta.url);
 const template = await readFile(new URL("index.html", dist), "utf8");
 const marker = '<div id="root"></div>';
@@ -26,6 +26,12 @@ function offerFor(item, label = item.name, amount = item.amount) {
   }
   return offer;
 }
+
+const faqPage = (items, url) => ({
+  "@type": "FAQPage",
+  "@id": `${url}#faq`,
+  mainEntity: items.map((faq) => ({ "@type": "Question", name: faq.question, acceptedAnswer: { "@type": "Answer", text: faq.answer } })),
+});
 
 function structuredData(page, url) {
   const provider = {
@@ -60,13 +66,24 @@ function structuredData(page, url) {
         provider,
         hasOfferCatalog: { "@type": "OfferCatalog", name: `${page.name} menu`, itemListElement: offers },
       },
+      faqPage(serviceFaqs(page), url),
     ],
   };
 }
 
 function pageHtml(page) {
   let html = template.replace(marker, `<div id="root">${render(page?.slug)}</div>`);
-  if (!page) return html;
+  if (!page) {
+    const homeLd = {
+      "@context": "https://schema.org",
+      "@graph": [
+        { "@type": "WebSite", "@id": `${SITE_URL}#website`, name: "Stacy's Esthetics", url: SITE_URL, inLanguage: "en-US" },
+        faqPage(faqs, SITE_URL),
+      ],
+    };
+    const script = `    <script type="application/ld+json">\n${JSON.stringify(homeLd, null, 2).replace(/</g, "\\u003c")}\n    </script>\n  </head>`;
+    return html.replace("</head>", script);
+  }
   const url = `${SITE_URL}${page.slug}/`;
   html = html.replace(/<title>[\s\S]*?<\/title>/, `<title>${escapeAttr(page.title)}</title>`);
   html = setMeta(html, /(<meta name="description" content=")[^"]*(")/, page.description);
@@ -95,5 +112,33 @@ await writeFile(
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((loc) => `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${today}</lastmod>\n  </url>`).join("\n")}\n</urlset>\n`
 );
 
+// llms.txt: a plain-language summary of the business for AI assistants and answer engines.
+const hours = studio.hours.map((row) => `${row.days}: ${row.time}`).join("; ");
+const llms = [
+  "# Stacy's Esthetics",
+  "",
+  `> Women- and Latino-owned esthetics studio in Prospect, Connecticut offering Japanese-style head spa, facials and microneedling, massage therapy, body contouring, post-op lymphatic drainage, laser hair removal, and waxing. Rated ${googleReviews.rating.toFixed(1)} out of 5 from ${googleReviews.count} Google reviews.`,
+  "",
+  "## Contact",
+  `- Address: ${studio.street.replace(/\.$/, "")}, ${studio.locality}`,
+  `- Phone: ${studio.phone}`,
+  `- Hours: ${hours}`,
+  `- Website: ${SITE_URL}`,
+  `- Google Maps: ${googleReviews.url}`,
+  "- Booking: online through each service page, or by phone",
+  "",
+  "## Services",
+  ...servicePages.map((page) => {
+    const from = startingPrice(page);
+    return `- [${page.h1}](${SITE_URL}${page.slug}/): ${page.tagline}${from !== undefined ? ` From $${from}.` : ""}`;
+  }),
+  "",
+  "## Optional",
+  `- [Home page](${SITE_URL}): studio overview, reviews, and frequently asked questions`,
+  `- [Sitemap](${SITE_URL}sitemap.xml)`,
+  "",
+].join("\n");
+await writeFile(new URL("llms.txt", dist), llms);
+
 await rm(new URL("../dist-ssr", import.meta.url), { recursive: true, force: true });
-console.log(`Pre-rendered ${servicePages.length + 1} pages and sitemap.xml`);
+console.log(`Pre-rendered ${servicePages.length + 1} pages, sitemap.xml, and llms.txt`);

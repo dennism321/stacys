@@ -2,6 +2,7 @@ import { ArrowRight, ArrowUpRight, Phone } from 'lucide-react';
 import { studio } from '../data';
 import { BASE, homeSection, photoSrcSet, servicePath } from '../paths';
 import { findServicePage, type MenuItem, type ServicePage } from '../servicePages';
+import { serviceFaqs } from '../serviceFaqs';
 
 function MenuItemRow({ item }: { item: MenuItem }) {
   return (
@@ -78,6 +79,20 @@ export default function ServicePageView({ page, onBook }: { page: ServicePage; o
               {page.notes.map((note) => <p key={note}>{note}</p>)}
             </aside>
           )}
+        </div>
+      </section>
+
+      <section className="sp-faq" aria-labelledby="sp-faq-title">
+        <div className="page-width sp-menu-inner">
+          <div className="sp-group-heading"><h2 id="sp-faq-title">Questions about {page.name.toLowerCase()}</h2></div>
+          <dl className="sp-faq-list">
+            {serviceFaqs(page).map((faq) => (
+              <div key={faq.question}>
+                <dt>{faq.question}</dt>
+                <dd>{faq.answer}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </section>
 

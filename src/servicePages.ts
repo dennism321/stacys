@@ -22,6 +22,8 @@ export type ServicePage = {
   slug: string;
   /** Name in menus and breadcrumbs. */
   name: string;
+  /** How the service reads inside a question, e.g. "a facial" in "How much does a facial cost?" */
+  faqName: string;
   /** One line for the header dropdown. */
   blurb: string;
   /** Search result title and description. */
@@ -43,6 +45,7 @@ export type ServicePage = {
 export const servicePages: ServicePage[] = [
   {
     slug: 'massage',
+    faqName: 'a massage',
     squareBooking: {
       // From the studio's Square Appointments embed code (widget ilht6vhelju99k, location L2A59ABR9VW2A).
       widgetUrl: 'https://app.squareup.com/appointments/buyer/widget/ilht6vhelju99k/L2A59ABR9VW2A',
@@ -84,6 +87,7 @@ export const servicePages: ServicePage[] = [
   },
   {
     slug: 'facials',
+    faqName: 'a facial',
     squareBooking: {
       // From the studio's Square Appointments embed code (widget ru24helt2qhr6e, location L2A59ABR9VW2A).
       widgetUrl: 'https://app.squareup.com/appointments/buyer/widget/ru24helt2qhr6e/L2A59ABR9VW2A',
@@ -133,6 +137,7 @@ export const servicePages: ServicePage[] = [
   },
   {
     slug: 'head-spa',
+    faqName: 'a head spa treatment',
     squareBooking: {
       // From the studio's Square Appointments embed code (widget r26e6n8laza8xu, location L2A59ABR9VW2A).
       widgetUrl: 'https://app.squareup.com/appointments/buyer/widget/r26e6n8laza8xu/L2A59ABR9VW2A',
@@ -169,6 +174,7 @@ export const servicePages: ServicePage[] = [
   },
   {
     slug: 'body-contouring',
+    faqName: 'body contouring',
     squareBooking: {
       // From the studio's Square Appointments embed code (widget 06pu25laattt97, location L2A59ABR9VW2A).
       widgetUrl: 'https://app.squareup.com/appointments/buyer/widget/06pu25laattt97/L2A59ABR9VW2A',
@@ -231,6 +237,7 @@ export const servicePages: ServicePage[] = [
   },
   {
     slug: 'post-op-recovery',
+    faqName: 'post-op lymphatic drainage',
     squareBooking: {
       // From the studio's Square Appointments embed code (widget rnxycw76cn27wi, location L2A59ABR9VW2A).
       widgetUrl: 'https://app.squareup.com/appointments/buyer/widget/rnxycw76cn27wi/L2A59ABR9VW2A',
@@ -270,6 +277,7 @@ export const servicePages: ServicePage[] = [
   },
   {
     slug: 'laser-hair-removal',
+    faqName: 'laser hair removal',
     squareBooking: {
       // From the studio's Square Appointments embed code (widget ppli9gbumj2lnc, location L2A59ABR9VW2A).
       widgetUrl: 'https://app.squareup.com/appointments/buyer/widget/ppli9gbumj2lnc/L2A59ABR9VW2A',
@@ -303,6 +311,7 @@ export const servicePages: ServicePage[] = [
   },
   {
     slug: 'waxing',
+    faqName: 'waxing',
     tile: { src: asset('images/waxing.webp'), alt: "A wax strip being smoothed onto a leg in soft natural light", caption: 'Smooth, in just minutes.' },
     image: { src: asset('images/waxing.webp'), alt: "A wax strip being smoothed onto a leg in soft natural light" },
     name: 'Waxing',

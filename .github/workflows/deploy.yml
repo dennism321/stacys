@@ -37,3 +37,15 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+      # Tell Bing (and IndexNow partners, which feed ChatGPT search and Copilot) that the pages changed.
+      # The key below must match public/<key>.txt. Failures here never fail the deploy.
+      - name: Notify IndexNow
+        continue-on-error: true
+        env:
+          INDEXNOW_KEY: 730cdaa26dc855315978b9af25090bcc
+        run: |
+          sleep 30
+          urls=$(curl -s https://stacyesthetics.com/sitemap.xml | grep -o '<loc>[^<]*' | sed 's/<loc>//' | jq -R . | jq -s -c .)
+          curl -s -o /dev/null -w "IndexNow responded %{http_code}\n" -X POST https://api.indexnow.org/indexnow \
+            -H 'Content-Type: application/json; charset=utf-8' \
+            -d "{\"host\":\"stacyesthetics.com\",\"key\":\"$INDEXNOW_KEY\",\"keyLocation\":\"https://stacyesthetics.com/$INDEXNOW_KEY.txt\",\"urlList\":$urls}"
