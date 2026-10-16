@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://dennism321.github.io/stacys/sitemap.xml
+Sitemap: https://stacyesthetics.com/sitemap.xml

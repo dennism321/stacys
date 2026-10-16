@@ -5,7 +5,7 @@ import App from "./App";
 import { BASE } from "./paths";
 import { findServicePage } from "./servicePages";
 
-// "/stacys/facials/" -> "facials"; the home page has no slug.
+// "/facials/" -> "facials"; the home page has no slug.
 const slug = window.location.pathname.slice(BASE.length).replace(/\/+$/, "");
 const page = slug ? findServicePage(slug) : undefined;
 
