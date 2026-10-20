@@ -1,4 +1,3 @@
-import { Languages } from 'lucide-react';
 import { useLang, useT } from '../i18n';
 import { pagePath } from '../paths';
 
@@ -10,7 +9,6 @@ export default function LangSwitch({ slug, className = '' }: { slug?: string; cl
 
   return (
     <a className={`lang-switch ${className}`} href={pagePath(other, slug)} hrefLang={other} lang={other} title={t.switchLabel} aria-label={t.switchLabel}>
-      <Languages size={16} strokeWidth={1.6} aria-hidden="true" />
       <span className="lang-switch-full">{t.switchTo}</span>
       <span className="lang-switch-short" aria-hidden="true">{t.switchToShort}</span>
     </a>
