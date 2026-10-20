@@ -1,6 +1,7 @@
 import { useEffect, useRef, type ReactNode } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { X } from 'lucide-react';
+import { useT } from '../i18n';
 
 type DialogProps = {
   children: ReactNode;
@@ -13,6 +14,7 @@ export default function Dialog({ children, onClose, labelledBy, className = '' }
   const dialogRef = useRef<HTMLElement>(null);
   const closeRef = useRef(onClose);
   const reduceMotion = useReducedMotion();
+  const t = useT();
   closeRef.current = onClose;
 
   useEffect(() => {
@@ -78,7 +80,7 @@ export default function Dialog({ children, onClose, labelledBy, className = '' }
         exit={{ opacity: 0, y: reduceMotion ? 0 : 12 }}
         transition={{ duration: reduceMotion ? 0 : 0.3 }}
       >
-        <button className="dialog-close" onClick={onClose} aria-label="Close dialog" type="button">
+        <button className="dialog-close" onClick={onClose} aria-label={t.closeDialog} type="button">
           <X size={20} strokeWidth={1.5} />
         </button>
         {children}

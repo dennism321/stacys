@@ -10,10 +10,12 @@ import SocialLinks from './components/SocialLinks';
 import { MobileServicesMenu, ServicesMenu } from './components/ServicesMenu';
 import ServicePageView from './components/ServicePageView';
 import SquareBooking from './components/SquareBooking';
-import { BASE, asset, homeSection, photoSrcSet, servicePath } from './paths';
-import { servicePages, type ServicePage } from './servicePages';
+import LangSwitch from './components/LangSwitch';
+import { asset, homePath, homeSection, photoSrcSet, servicePath } from './paths';
+import { localizedPages, type ServicePage } from './servicePages';
+import { useLang, useT } from './i18n';
 import { PolicyDetails, StudioDetails } from './components/StudioDialogs';
-import { DRAFT_KEY, faqs, readDraft, studio, type AppointmentDraft } from './data';
+import { DRAFT_KEY, faqsFor, readDraft, studio, studioHours, type AppointmentDraft } from './data';
 
 type OpenDialog =
   | { type: 'planner'; serviceId?: string }
@@ -33,8 +35,13 @@ function Botanical({ className = '' }: { className?: string }) {
   );
 }
 
-/** One shell for every page: the home page, or a service page when `page` is set. */
+/** One shell for every page: the home page, or a service page when `page` is set (already localized). */
 export default function App({ page }: { page?: ServicePage }) {
+  const lang = useLang();
+  const t = useT();
+  const pages = localizedPages(lang);
+  const faqs = faqsFor(lang);
+  const home = homePath(lang);
   const [dialog, setDialog] = useState<OpenDialog>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -98,42 +105,44 @@ export default function App({ page }: { page?: ServicePage }) {
 
   const heroItem = { hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0 } };
   // Section links point at the home page when we're on a service page.
-  const section = (id: string) => (page ? homeSection(id) : `#${id}`);
+  const section = (id: string) => (page ? homeSection(id, lang) : `#${id}`);
 
   return (
     <>
       <div inert={dialog ? true : undefined}>
-        <a className="skip-link" href="#main">Skip to content</a>
+        <a className="skip-link" href="#main">{t.skipToContent}</a>
         <header className={`site-header ${scrolled ? 'is-scrolled' : ''}`}>
           <div className="header-inner">
             <div className="header-side header-left">
-              <button type="button" id="mobile-menu-toggle" className="menu-toggle" aria-label={menuOpen ? 'Close navigation' : 'Open navigation'} aria-expanded={menuOpen} aria-controls="mobile-navigation" onClick={() => setMenuOpen(!menuOpen)}>
+              <button type="button" id="mobile-menu-toggle" className="menu-toggle" aria-label={menuOpen ? t.closeNav : t.openNav} aria-expanded={menuOpen} aria-controls="mobile-navigation" onClick={() => setMenuOpen(!menuOpen)}>
                 {menuOpen ? <X size={23} strokeWidth={1.5} /> : <Menu size={23} strokeWidth={1.5} />}
               </button>
-              <nav className="desktop-nav" aria-label="Main navigation">
+              <LangSwitch slug={page?.slug} className="lang-switch-mobile" />
+              <nav className="desktop-nav" aria-label={t.mainNav}>
                 <ServicesMenu />
-                <a href={section('philosophy')}>Our Philosophy</a>
-                <a href={section('visit')}>Your Visit</a>
+                <a href={section('philosophy')}>{t.ourPhilosophy}</a>
+                <a href={section('visit')}>{t.yourVisit}</a>
               </nav>
             </div>
-            <a href={page ? BASE : '#home'} className="brand-pendant" onClick={() => setMenuOpen(false)}>
+            <a href={page ? home : '#home'} className="brand-pendant" onClick={() => setMenuOpen(false)}>
               <BrandLogo />
             </a>
             <div className="header-side header-right">
               <SocialLinks className="header-social" />
+              <LangSwitch slug={page?.slug} className="lang-switch-desktop" />
               <button type="button" className="button button-primary header-booking" onClick={() => openPlanner()}>
-                <span className="desktop-book-label">{savedDraft ? 'View your appointment plan' : 'Book an appointment'}</span>
-                <span className="mobile-book-label">{savedDraft ? 'Your plan' : 'Book'}</span>
+                <span className="desktop-book-label">{savedDraft ? t.viewPlan : t.bookAppointment}</span>
+                <span className="mobile-book-label">{savedDraft ? t.yourPlan : t.book}</span>
                 <ArrowUpRight size={15} strokeWidth={1.5} />
               </button>
             </div>
           </div>
           <AnimatePresence>
             {menuOpen && (
-              <motion.nav id="mobile-navigation" className="mobile-nav" aria-label="Mobile navigation" initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: reduceMotion ? 0 : 0.25 }}>
+              <motion.nav id="mobile-navigation" className="mobile-nav" aria-label={t.mobileNav} initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: reduceMotion ? 0 : 0.25 }}>
                 <MobileServicesMenu onNavigate={() => setMenuOpen(false)} />
-                <a href={section('philosophy')} onClick={() => setMenuOpen(false)}>Our Philosophy<ArrowUpRight size={18} /></a>
-                <a href={section('visit')} onClick={() => setMenuOpen(false)}>Your Visit<ArrowUpRight size={18} /></a>
+                <a href={section('philosophy')} onClick={() => setMenuOpen(false)}>{t.ourPhilosophy}<ArrowUpRight size={18} /></a>
+                <a href={section('visit')} onClick={() => setMenuOpen(false)}>{t.yourVisit}<ArrowUpRight size={18} /></a>
                 <SocialLinks className="mobile-nav-social" />
               </motion.nav>
             )}
@@ -153,13 +162,13 @@ export default function App({ page }: { page?: ServicePage }) {
               </motion.video>
               <div className="page-width hero-inner">
                 <motion.div className="hero-copy" initial={reduceMotion ? 'visible' : 'hidden'} animate="visible" variants={{ visible: { transition: { staggerChildren: 0.11, delayChildren: 0.12 } } }}>
-                  <motion.p className="eyebrow hero-eyebrow" variants={heroItem} transition={{ duration: 0.65 }}>WELCOME TO STACY'S ESTHETICS</motion.p>
-                  <motion.h1 id="hero-title" variants={heroItem} transition={{ duration: 0.75 }}>Beauty,<br /><em>in balance.</em></motion.h1>
-                  <motion.p className="hero-mantra" variants={heroItem} transition={{ duration: 0.7 }}>Care that feels like coming home to yourself.</motion.p>
-                  <motion.p className="hero-description" variants={heroItem} transition={{ duration: 0.7 }}>Head spa rituals, facials, massage, and body<br className="desktop-break" /> contouring. Thoughtfully designed around you.</motion.p>
+                  <motion.p className="eyebrow hero-eyebrow" variants={heroItem} transition={{ duration: 0.65 }}>{t.heroEyebrow}</motion.p>
+                  <motion.h1 id="hero-title" variants={heroItem} transition={{ duration: 0.75 }}>{t.heroTitle[0]}<br /><em>{t.heroTitle[1]}</em></motion.h1>
+                  <motion.p className="hero-mantra" variants={heroItem} transition={{ duration: 0.7 }}>{t.heroMantra}</motion.p>
+                  <motion.p className="hero-description" variants={heroItem} transition={{ duration: 0.7 }}>{t.heroDescription[0]}<br className="desktop-break" /> {t.heroDescription[1]}</motion.p>
                   <motion.div className="hero-actions" variants={heroItem} transition={{ duration: 0.7 }}>
-                    <button type="button" className="button button-primary" onClick={() => openPlanner()}>Book your moment<ArrowUpRight size={16} strokeWidth={1.5} /></button>
-                    <a href="#services" className="hero-explore">Explore treatments<ArrowRight size={16} strokeWidth={1.5} /></a>
+                    <button type="button" className="button button-primary" onClick={() => openPlanner()}>{t.bookYourMoment}<ArrowUpRight size={16} strokeWidth={1.5} /></button>
+                    <a href="#services" className="hero-explore">{t.exploreTreatments}<ArrowRight size={16} strokeWidth={1.5} /></a>
                   </motion.div>
                 </motion.div>
               </div>
@@ -168,14 +177,14 @@ export default function App({ page }: { page?: ServicePage }) {
             <section id="services" className="services-section section-space" aria-labelledby="services-title">
               <div className="page-width">
                 <Reveal className="section-heading centered">
-                  <p className="eyebrow">THE ART OF FEELING GOOD</p>
-                  <h2 id="services-title" className="section-title">Beautiful care. <em>Just for you.</em></h2>
+                  <p className="eyebrow">{t.servicesEyebrow}</p>
+                  <h2 id="services-title" className="section-title">{t.servicesTitle[0]} <em>{t.servicesTitle[1]}</em></h2>
                   <span className="heading-rule" aria-hidden="true" />
                 </Reveal>
                 <div className="services-grid">
-                  {servicePages.map((item, index) => (
+                  {pages.map((item, index) => (
                     <Reveal key={item.slug} className="service-tile" delay={(index % 4) * 0.07}>
-                      <a className="service-link" href={servicePath(item.slug)}>
+                      <a className="service-link" href={servicePath(item.slug, lang)}>
                         <span className={`service-image-wrap service-image-${item.slug}`}><img src={item.tile.src} srcSet={photoSrcSet(item.tile.src)} sizes="(max-width: 1100px) 50vw, 25vw" alt={item.tile.alt} loading="lazy" width="600" height="700" /></span>
                         <span className="service-name-row"><span className="service-name">{item.name}</span><ArrowUpRight size={22} strokeWidth={1.1} aria-hidden="true" /></span>
                         <span className="service-caption">{item.tile.caption}</span>
@@ -183,7 +192,7 @@ export default function App({ page }: { page?: ServicePage }) {
                     </Reveal>
                   ))}
                 </div>
-                <Reveal className="services-footnote"><p>Every face, every body, every story is different. Your care should be, too.</p></Reveal>
+                <Reveal className="services-footnote"><p>{t.servicesFootnote}</p></Reveal>
               </div>
             </section>
 
@@ -191,15 +200,15 @@ export default function App({ page }: { page?: ServicePage }) {
 
             <section id="philosophy" className="philosophy-section" aria-labelledby="philosophy-title">
               <div className="page-width philosophy-grid">
-                <Reveal className="philosophy-image-wrap"><img src={asset('images/our-space.webp')} srcSet={photoSrcSet(asset('images/our-space.webp'), 912)} sizes="(max-width: 767px) 100vw, 45vw" alt="Warm sunlight falling across a linen-covered treatment bed in a serene beige spa" loading="lazy" width="640" height="800" /></Reveal>
+                <Reveal className="philosophy-image-wrap"><img src={asset('images/our-space.webp')} srcSet={photoSrcSet(asset('images/our-space.webp'), 912)} sizes="(max-width: 767px) 100vw, 45vw" alt={t.philosophyAlt} loading="lazy" width="640" height="800" /></Reveal>
                 <Reveal className="philosophy-copy" delay={0.12}>
-                  <p className="eyebrow">A THOUGHTFUL APPROACH TO YOU</p>
-                  <h2 id="philosophy-title" className="section-title">More than a treatment.<br />A moment to <em>come<br className="philosophy-break" /> back to you.</em></h2>
+                  <p className="eyebrow">{t.philosophyEyebrow}</p>
+                  <h2 id="philosophy-title" className="section-title">{t.philosophyTitle[0]}<br />{t.philosophyTitle[1]} <em>{t.philosophyTitle[2]}<br className="philosophy-break" /> {t.philosophyTitle[3]}</em></h2>
                   <span className="small-rule" aria-hidden="true" />
-                  <p className="section-description">We believe that beauty and wellbeing belong together. That feeling good in your skin starts with feeling truly cared for.</p>
-                  <p className="section-description">Here, you can slow down, let go, and enjoy care that's as individual as you are. No rush. Just a little space to feel like yourself again.</p>
-                  <p className="signature">With care, Stacy</p>
-                  <a className="underlined-link" href="#services">Find your own kind of renewal<ArrowRight size={16} strokeWidth={1.4} /></a>
+                  <p className="section-description">{t.philosophyP1}</p>
+                  <p className="section-description">{t.philosophyP2}</p>
+                  <p className="signature">{t.signature}</p>
+                  <a className="underlined-link" href="#services">{t.findRenewal}<ArrowRight size={16} strokeWidth={1.4} /></a>
                 </Reveal>
               </div>
             </section>
@@ -207,10 +216,10 @@ export default function App({ page }: { page?: ServicePage }) {
             <section id="visit" className="visit-section section-space" aria-labelledby="visit-title">
               <div className="page-width visit-grid">
                 <Reveal className="visit-copy">
-                  <p className="eyebrow">BEFORE YOU UNWIND</p>
-                  <h2 id="visit-title" className="section-title">A little clarity.<br /><em>A lot more calm.</em></h2>
-                  <p className="section-description">A few things to know, so you can focus on what matters. You.</p>
-                  <button type="button" className="underlined-link" onClick={() => openPlanner()}>Let's plan your visit<ArrowRight size={16} strokeWidth={1.4} /></button>
+                  <p className="eyebrow">{t.visitEyebrow}</p>
+                  <h2 id="visit-title" className="section-title">{t.visitTitle[0]}<br /><em>{t.visitTitle[1]}</em></h2>
+                  <p className="section-description">{t.visitDescription}</p>
+                  <button type="button" className="underlined-link" onClick={() => openPlanner()}>{t.planVisit}<ArrowRight size={16} strokeWidth={1.4} /></button>
                 </Reveal>
                 <Reveal className="faq-list" delay={0.1}>
                   {faqs.map((faq, index) => (
@@ -228,10 +237,10 @@ export default function App({ page }: { page?: ServicePage }) {
             <section className="closing-section" aria-labelledby="closing-title">
               <Reveal className="closing-content">
                 <Botanical className="closing-botanical" />
-                <p className="eyebrow">YOUR WELLBEING, BEAUTIFULLY PERSONAL</p>
-                <h2 id="closing-title" className="section-title">You deserve a moment<br />that's <em>only yours.</em></h2>
-                <p>Let the rest of the world wait a little.</p>
-                <button type="button" className="button button-primary" onClick={() => openPlanner()}>Let's make time for you<ArrowUpRight size={16} strokeWidth={1.5} /></button>
+                <p className="eyebrow">{t.closingEyebrow}</p>
+                <h2 id="closing-title" className="section-title">{t.closingTitle[0]}<br />{t.closingTitle[1]} <em>{t.closingTitle[2]}</em></h2>
+                <p>{t.closingText}</p>
+                <button type="button" className="button button-primary" onClick={() => openPlanner()}>{t.closingButton}<ArrowUpRight size={16} strokeWidth={1.5} /></button>
               </Reveal>
             </section>
             </>
@@ -241,12 +250,12 @@ export default function App({ page }: { page?: ServicePage }) {
         <footer className="site-footer">
           <div className="page-width">
             <div className="footer-top">
-              <div className="footer-brand"><a href={page ? BASE : '#home'}><BrandLogo variant="footer" /></a><p>Beauty in balance. Care without hurry.</p><SocialLinks /></div>
-              <nav className="footer-nav" aria-label="Services"><p className="footer-label">SERVICES</p>{servicePages.map((item) => <a key={item.slug} href={servicePath(item.slug)}>{item.name}</a>)}</nav>
-              <nav className="footer-nav" aria-label="Studio information"><p className="footer-label">A LITTLE MORE</p><button type="button" onClick={() => showDialog({ type: 'studio' })}>Studio & contact<ArrowUpRight size={13} /></button><button type="button" onClick={() => showDialog({ type: 'policies', tab: 'booking' })}>Booking policies</button><button type="button" onClick={() => openPlanner()}>Your appointment plan</button></nav>
-              <address className="footer-visit"><p className="footer-label">VISIT US</p><a href={studio.mapsHref} target="_blank" rel="noopener noreferrer">{studio.street}<br />{studio.locality}</a><a href={studio.phoneHref}>{studio.phone}</a><dl className="footer-hours">{studio.hours.map((row) => <div key={row.days} style={{ display: 'contents' }}><dt>{row.days}</dt><dd>{row.time}</dd></div>)}</dl></address>
+              <div className="footer-brand"><a href={page ? home : '#home'}><BrandLogo variant="footer" /></a><p>{t.footerTagline}</p><SocialLinks /></div>
+              <nav className="footer-nav" aria-label={t.services}><p className="footer-label">{t.footerServices}</p>{pages.map((item) => <a key={item.slug} href={servicePath(item.slug, lang)}>{item.name}</a>)}</nav>
+              <nav className="footer-nav" aria-label={t.studioContact}><p className="footer-label">{t.footerMore}</p><button type="button" onClick={() => showDialog({ type: 'studio' })}>{t.studioContact}<ArrowUpRight size={13} /></button><button type="button" onClick={() => showDialog({ type: 'policies', tab: 'booking' })}>{t.bookingPolicies}</button><button type="button" onClick={() => openPlanner()}>{t.yourAppointmentPlan}</button></nav>
+              <address className="footer-visit"><p className="footer-label">{t.footerVisit}</p><a href={studio.mapsHref} target="_blank" rel="noopener noreferrer">{studio.street}<br />{studio.locality}</a><a href={studio.phoneHref}>{studio.phone}</a><dl className="footer-hours">{studioHours(lang).map((row) => <div key={row.days} style={{ display: 'contents' }}><dt>{row.days}</dt><dd>{row.time}</dd></div>)}</dl></address>
             </div>
-            <div className="footer-bottom"><p>&copy; {new Date().getFullYear()} Stacy's Esthetics. All rights reserved.</p><a className="footer-credit" href="https://techathos.com" target="_blank" rel="noopener noreferrer">Powered by<img src={asset('images/techathos-helmet.svg')} alt="" width="18" height="18" />TechAthos</a><a href="#main" className="back-to-top">Back to the slow life<ArrowUp size={14} strokeWidth={1.4} /></a></div>
+            <div className="footer-bottom"><p>&copy; {new Date().getFullYear()} {t.rights}</p><a className="footer-credit" href="https://techathos.com" target="_blank" rel="noopener noreferrer">{t.poweredBy}<img src={asset('images/techathos-helmet.svg')} alt="" width="18" height="18" />TechAthos</a><a href="#main" className="back-to-top">{t.backToTop}<ArrowUp size={14} strokeWidth={1.4} /></a></div>
           </div>
         </footer>
       </div>

@@ -1,4 +1,5 @@
 import { findServicePage } from './servicePages';
+import type { Lang } from './i18n';
 
 /** Studio contact details, as published on the studio's Wix site. Keep index.html's JSON-LD in sync. */
 export const studio = {
@@ -13,6 +14,15 @@ export const studio = {
     { days: 'Sunday', time: 'Closed' },
   ],
 };
+
+const hoursEs = [
+  { days: 'Lunes a viernes', time: '9:30 am – 6:00 pm' },
+  { days: 'Sábado', time: '9:30 am – 4:00 pm' },
+  { days: 'Domingo', time: 'Cerrado' },
+];
+
+/** Opening hours with day names in the given language. */
+export const studioHours = (lang: Lang) => (lang === 'es' ? hoursEs : studio.hours);
 
 /**
  * Google rating and highlights from the studio's Google reviews. The highlights are short summaries
@@ -31,7 +41,18 @@ export const googleReviews = {
   ],
 };
 
-export const faqs = [
+const highlightsEs = [
+  { name: 'Janio', service: 'Facial de limpieza profunda', summary: 'Un equipo profesional y experto que le explicó cada paso de un facial de limpieza profunda y le hizo sentir cómodo durante toda la visita.' },
+  { name: 'Yasmin', service: 'Atención de la esteticista', summary: 'Un servicio excepcional y atento que la dejó relajada y bien informada; en su opinión, el mejor de Connecticut.' },
+  { name: 'Virginia', service: 'Faciales y masajes', summary: 'Faciales que renovaron su piel y masajes maravillosamente relajantes. Recomienda el estudio sin dudar.' },
+  { name: 'Yajaira', service: 'Clienta habitual', summary: 'Un lugar favorito al que siempre vuelve, por un servicio excelente y constante y una verdadera experiencia profesional.' },
+  { name: 'Toan', service: 'Visita al estudio', summary: 'Un estudio increíble, impecable y totalmente profesional.' },
+];
+
+/** Review highlights in the given language. */
+export const reviewHighlights = (lang: Lang) => (lang === 'es' ? highlightsEs : googleReviews.highlights);
+
+export const faqsEn = [
   {
     question: 'Which treatment is right for me?',
     answer:
@@ -53,6 +74,35 @@ export const faqs = [
       "You'll find the studio at 26 Union City Rd. in Prospect, CT 06712. We're open Monday to Friday from 9:30 am to 6:00 pm and Saturday from 9:30 am to 4:00 pm, and closed on Sunday. Call 914-310-4680 with any questions before your visit.",
   },
 ];
+
+const faqsEs = [
+  {
+    question: '¿Qué tratamiento es el adecuado para mí?',
+    answer:
+      'Empieza por lo que más necesitas: cuidado de la piel, tiempo para relajarte, moldeo corporal o un ritual calmante para el cuero cabelludo. Explora cada tratamiento arriba y luego reserva en línea o llámanos; tu especialista te ayudará a confirmar la mejor opción antes del tratamiento.',
+  },
+  {
+    question: '¿Qué debo saber antes de mi primera visita?',
+    answer:
+      'Pregunta a tu especialista sobre la preparación, los tiempos y los cuidados posteriores del tratamiento que elegiste. Comparte cualquier tema de salud relevante en privado con tu especialista, no a través del planificador en línea. Confirma los detalles y precios del tratamiento antes de tu visita.',
+  },
+  {
+    question: '¿Cuáles son sus políticas de reserva y cancelación?',
+    answer:
+      'Las políticas de depósito, cancelación, reprogramación y llegadas tarde del estudio están pendientes de confirmación. Solicita las condiciones finales directamente al estudio antes de reservar. El planificador de citas de este sitio solo guarda un borrador: no envía ninguna solicitud ni cobra nada.',
+  },
+  {
+    question: '¿Dónde está el estudio?',
+    answer:
+      'El estudio está en 26 Union City Rd., Prospect, CT 06712. Abrimos de lunes a viernes de 9:30 am a 6:00 pm y los sábados de 9:30 am a 4:00 pm; los domingos estamos cerrados. Llama al 914-310-4680 si tienes preguntas antes de tu visita.',
+  },
+];
+
+/** Home page FAQs in the given language. */
+export const faqsFor = (lang: Lang) => (lang === 'es' ? faqsEs : faqsEn);
+
+/** English FAQs, kept under the old name for the build script and structured data. */
+export const faqs = faqsEn;
 
 export type AppointmentDraft = {
   version: 1;
@@ -109,8 +159,8 @@ export function localDateString(date = new Date()) {
   return `${year}-${month}-${day}`;
 }
 
-export function formatDate(date: string) {
-  return new Date(`${date}T12:00:00`).toLocaleDateString('en-US', {
+export function formatDate(date: string, locale = 'en-US') {
+  return new Date(`${date}T12:00:00`).toLocaleDateString(locale, {
     weekday: 'long',
     month: 'long',
     day: 'numeric',

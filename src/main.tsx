@@ -2,17 +2,22 @@ import { StrictMode } from "react";
 import { createRoot, hydrateRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App";
+import { LangContext, type Lang } from "./i18n";
 import { BASE } from "./paths";
-import { findServicePage } from "./servicePages";
+import { findLocalizedPage } from "./servicePages";
 
-// "/facials/" -> "facials"; the home page has no slug.
-const slug = window.location.pathname.slice(BASE.length).replace(/\/+$/, "");
-const page = slug ? findServicePage(slug) : undefined;
+// "/facials/" -> English facials; "/es/facials/" -> Spanish facials; "/es/" -> Spanish home.
+const parts = window.location.pathname.slice(BASE.length).split("/").filter(Boolean);
+const lang: Lang = parts[0] === "es" ? "es" : "en";
+const slug = (lang === "es" ? parts[1] : parts[0]) ?? "";
+const page = slug ? findLocalizedPage(slug, lang) : undefined;
 
 const root = document.getElementById("root")!;
 const app = (
   <StrictMode>
-    <App page={page} />
+    <LangContext.Provider value={lang}>
+      <App page={page} />
+    </LangContext.Provider>
   </StrictMode>
 );
 

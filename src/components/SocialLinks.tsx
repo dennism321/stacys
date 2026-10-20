@@ -1,3 +1,5 @@
+import { useT } from '../i18n';
+
 const socials = [
   {
     name: 'Instagram',
@@ -25,11 +27,12 @@ const socials = [
 
 /** Round icon links to the studio's social profiles; each opens in a new tab. */
 export default function SocialLinks({ className = '' }: { className?: string }) {
+  const t = useT();
   return (
-    <ul className={`social-links ${className}`} aria-label="Follow Stacy's Esthetics">
+    <ul className={`social-links ${className}`} aria-label={t.followUs}>
       {socials.map((social) => (
         <li key={social.name}>
-          <a href={social.href} target="_blank" rel="noopener noreferrer" aria-label={`${social.name} ${social.handle} (opens in a new tab)`} title={`${social.name} ${social.handle}`}>
+          <a href={social.href} target="_blank" rel="noopener noreferrer" aria-label={`${social.name} ${social.handle} (${t.opensNewTab})`} title={`${social.name} ${social.handle}`}>
             {social.icon}
           </a>
         </li>

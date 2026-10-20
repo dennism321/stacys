@@ -1,5 +1,6 @@
 import { ArrowUpRight } from 'lucide-react';
 import { type ServicePage } from '../servicePages';
+import { useT } from '../i18n';
 
 type SquareService = ServicePage & { squareBooking: NonNullable<ServicePage['squareBooking']> };
 
@@ -8,17 +9,18 @@ export const booksOnSquare = (page?: ServicePage): page is SquareService => Bool
 
 /** The Square Appointments calendar, embedded the same way Square's own embed script does, plus a new-tab fallback. */
 export function SquareFrame({ page }: { page: SquareService }) {
+  const t = useT();
   return (
     <>
       <iframe
         className="square-booking-frame"
         src={page.squareBooking.widgetUrl}
-        title={`Book ${page.name} with Stacy's Esthetics on Square Appointments`}
+        title={t.squareFrameTitle(page.name)}
         allow="payment app.squareup.com"
       />
       <p className="square-booking-fallback">
-        Trouble seeing the calendar?{' '}
-        <a href={page.squareBooking.bookUrl} target="_blank" rel="noopener noreferrer">Open booking in a new tab<ArrowUpRight size={14} strokeWidth={1.5} /></a>
+        {t.squareTrouble}{' '}
+        <a href={page.squareBooking.bookUrl} target="_blank" rel="noopener noreferrer">{t.squareNewTab}<ArrowUpRight size={14} strokeWidth={1.5} /></a>
       </p>
     </>
   );
@@ -26,12 +28,13 @@ export function SquareFrame({ page }: { page: SquareService }) {
 
 /** Booking dialog content for a service page that books through Square. */
 export default function SquareBooking({ page }: { page: SquareService }) {
+  const t = useT();
   return (
     <div className="square-booking">
       <div className="square-booking-heading">
-        <p className="eyebrow">BOOK ONLINE</p>
-        <h2 id="square-booking-title" className="dialog-title">Book your <em>{page.name.toLowerCase()}.</em></h2>
-        <p className="dialog-intro">Choose your treatment and a time that suits you. Booking is handled securely by Square.</p>
+        <p className="eyebrow">{t.bookOnline}</p>
+        <h2 id="square-booking-title" className="dialog-title">{t.bookYour} <em>{page.name.toLowerCase()}.</em></h2>
+        <p className="dialog-intro">{t.squareIntro}</p>
       </div>
       <SquareFrame page={page} />
     </div>

@@ -1,5 +1,6 @@
 import { ArrowUpRight, Star } from 'lucide-react';
-import { googleReviews } from '../data';
+import { googleReviews, reviewHighlights } from '../data';
+import { useLang, useT } from '../i18n';
 import Reveal from './Reveal';
 
 function Stars({ size = 15 }: { size?: number }) {
@@ -12,14 +13,17 @@ function Stars({ size = 15 }: { size?: number }) {
 
 /** "What our customers say": the Google rating plus short summaries of standout reviews. */
 export default function ReviewsSection() {
-  const { rating, count, url, highlights } = googleReviews;
+  const lang = useLang();
+  const t = useT();
+  const { rating, count, url } = googleReviews;
+  const highlights = reviewHighlights(lang);
 
   return (
     <section id="reviews" className="reviews-section section-space" aria-labelledby="reviews-title">
       <div className="page-width">
         <Reveal className="section-heading centered">
-          <p className="eyebrow">KIND WORDS</p>
-          <h2 id="reviews-title" className="section-title">What our customers <em>say about us</em></h2>
+          <p className="eyebrow">{t.reviewsEyebrow}</p>
+          <h2 id="reviews-title" className="section-title">{t.reviewsTitle[0]} <em>{t.reviewsTitle[1]}</em></h2>
           <span className="heading-rule" aria-hidden="true" />
         </Reveal>
 
@@ -27,7 +31,7 @@ export default function ReviewsSection() {
           <span className="reviews-score">{rating.toFixed(1)}</span>
           <span className="reviews-summary-copy">
             <Stars size={18} />
-            <span>Rated {rating.toFixed(1)} out of 5 from {count} Google reviews</span>
+            <span>{t.reviewsRated(rating.toFixed(1), count)}</span>
           </span>
         </Reveal>
 
@@ -44,8 +48,8 @@ export default function ReviewsSection() {
         </ul>
 
         <Reveal className="reviews-footer">
-          <a className="button button-outline" href={url} target="_blank" rel="noopener noreferrer">Read all {count} reviews on Google<ArrowUpRight size={16} strokeWidth={1.5} /></a>
-          <p className="reviews-note">Highlights are short summaries of verified Google reviews. Reviewers are shown by first name.</p>
+          <a className="button button-outline" href={url} target="_blank" rel="noopener noreferrer">{t.reviewsReadAll(count)}<ArrowUpRight size={16} strokeWidth={1.5} /></a>
+          <p className="reviews-note">{t.reviewsNote}</p>
         </Reveal>
       </div>
     </section>

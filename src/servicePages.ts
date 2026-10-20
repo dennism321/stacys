@@ -1,4 +1,6 @@
 import { asset } from './paths';
+import type { Lang } from './i18n';
+import { servicePagesEs } from './servicePages.es';
 
 /** A single price, a [min, max] range, or nothing when the menu gives no price. */
 export type Amount = number | [number, number];
@@ -340,6 +342,52 @@ export const servicePages: ServicePage[] = [
 
 export const findServicePage = (slug: string) => servicePages.find((page) => page.slug === slug);
 
+/** A service page with its text in the given language; prices, photos, and booking links are shared. */
+export function localizePage(page: ServicePage, lang: Lang): ServicePage {
+  const es = lang === 'es' ? servicePagesEs[page.slug] : undefined;
+  if (!es) return page;
+  return {
+    ...page,
+    name: es.name,
+    faqName: es.faqName,
+    blurb: es.blurb,
+    title: es.title,
+    description: es.description,
+    h1: es.h1,
+    tagline: es.tagline,
+    intro: es.intro,
+    image: page.image && { ...page.image, alt: es.imageAlt ?? page.image.alt },
+    tile: { ...page.tile, ...es.tile },
+    notes: es.notes ?? page.notes,
+    groups: page.groups.map((group, g) => {
+      const eg = es.groups[g];
+      return {
+        ...group,
+        title: eg?.title ?? group.title,
+        intro: eg?.intro ?? group.intro,
+        items: group.items.map((item, i) => {
+          const ei = eg?.items[i];
+          return {
+            ...item,
+            name: ei?.name ?? item.name,
+            meta: ei?.meta ?? item.meta,
+            price: ei?.price ?? item.price,
+            description: ei?.description ?? item.description,
+            packages: item.packages?.map((pkg, k) => ({ ...pkg, label: ei?.packages?.[k]?.label ?? pkg.label, note: ei?.packages?.[k]?.note ?? pkg.note })),
+          };
+        }),
+      };
+    }),
+  };
+}
+
+export const localizedPages = (lang: Lang) => servicePages.map((page) => localizePage(page, lang));
+
+export const findLocalizedPage = (slug: string, lang: Lang) => {
+  const page = findServicePage(slug);
+  return page && localizePage(page, lang);
+};
+
 const lowest = (amount?: Amount) => (Array.isArray(amount) ? amount[0] : amount);
 
 /** The lowest price on a page's menu, for "from $X" labels. */
@@ -353,7 +401,7 @@ export function startingPrice(page: ServicePage) {
 export function treatmentOptions(page: ServicePage) {
   return page.groups.filter((group) => !group.addOn).flatMap((group) =>
     group.items.flatMap((item) => {
-      const meta = item.meta?.filter((fact) => !fact.startsWith('Adds')) ?? [];
+      const meta = item.meta?.filter((fact) => !/^(Adds|Añade)\b/.test(fact)) ?? [];
       if (item.packages) return item.packages.map((pkg) => [item.name, pkg.label, ...meta, pkg.price].join(' · '));
       return [[item.name, ...meta, item.price].filter(Boolean).join(' · ')];
     })
