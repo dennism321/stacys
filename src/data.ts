@@ -34,7 +34,7 @@ export const googleReviews = {
   count: 33,
   url: 'https://maps.google.com/?cid=1480761830549486181',
   highlights: [
-    { name: 'Janio', service: 'Deep cleansing facial', summary: 'A professional, knowledgeable team who explained every step of a deep cleansing facial and made the whole visit comfortable.' },
+    { name: 'Edili', service: 'Treatments with Stacy', summary: "The best place ever visited: Stacy's professionalism and attention went beyond every expectation, at very affordable prices." },
     { name: 'Yasmin', service: 'Esthetician care', summary: 'Exceptional, attentive service that left her relaxed and fully informed, and in her view the best in Connecticut.' },
     { name: 'Virginia', service: 'Facials & massage', summary: 'Facials that renewed her skin and wonderfully relaxing massages. She highly recommends the studio.' },
     { name: 'Yajaira', service: 'Returning client', summary: 'A favorite place she keeps coming back to, for consistently excellent service and real expertise.' },
@@ -43,7 +43,7 @@ export const googleReviews = {
 };
 
 const highlightsEs = [
-  { name: 'Janio', service: 'Facial de limpieza profunda', summary: 'Un equipo profesional y experto que le explicó cada paso de un facial de limpieza profunda y le hizo sentir cómodo durante toda la visita.' },
+  { name: 'Edili', service: 'Tratamientos con Stacy', summary: 'El mejor lugar que ha visitado: el profesionalismo y la atención de Stacy superaron todas sus expectativas, con precios muy accesibles.' },
   { name: 'Yasmin', service: 'Atención de la esteticista', summary: 'Un servicio excepcional y atento que la dejó relajada y bien informada; en su opinión, el mejor de Connecticut.' },
   { name: 'Virginia', service: 'Faciales y masajes', summary: 'Faciales que renovaron su piel y masajes maravillosamente relajantes. Recomienda el estudio sin dudar.' },
   { name: 'Yajaira', service: 'Clienta habitual', summary: 'Un lugar favorito al que siempre vuelve, por un servicio excelente y constante y una verdadera experiencia profesional.' },
