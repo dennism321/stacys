@@ -737,3 +737,10 @@ svg { flex-shrink: 0; }
   .gift-card img { width: 72px; top: 20px; right: 20px; }
   .gift-card-name { font-size: 30px; }
 }
+
+/* Header gift card link: icon + label, icon only where the nav would reach the logo */
+.desktop-nav .nav-gift { display: inline-flex; align-items: center; gap: 6px; }
+.desktop-nav .nav-gift svg { flex: none; margin-top: -1px; }
+@media (min-width: 1151px) { .desktop-nav { gap: 26px; } }
+@media (min-width: 1151px) and (max-width: 1279px) { .desktop-nav { gap: 18px; } .desktop-nav a, .desktop-nav .services-menu-trigger { font-size: 14px; } }
+@media (max-width: 1419px) { .desktop-nav .nav-gift span { display: none; } }

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import { ArrowRight, ArrowUp, ArrowUpRight, ChevronDown, Menu, X } from 'lucide-react';
+import { ArrowRight, ArrowUp, ArrowUpRight, ChevronDown, Gift, Menu, X } from 'lucide-react';
 import Dialog from './components/Dialog';
 import Reveal from './components/Reveal';
 import ReviewsSection from './components/ReviewsSection';
@@ -122,6 +122,7 @@ export default function App({ page }: { page?: ServicePage }) {
                 <ServicesMenu />
                 <a href={section('philosophy')}>{t.ourPhilosophy}</a>
                 <a href={section('visit')}>{t.yourVisit}</a>
+                <a className="nav-gift" href={section('gift-cards')} title={t.navGiftCards} aria-label={t.navGiftCards}><Gift size={15} strokeWidth={1.5} aria-hidden="true" /><span>{t.navGiftShort}</span></a>
               </nav>
             </div>
             <a href={page ? home : '#home'} className="brand-pendant" onClick={() => setMenuOpen(false)}>
@@ -143,6 +144,7 @@ export default function App({ page }: { page?: ServicePage }) {
                 <MobileServicesMenu onNavigate={() => setMenuOpen(false)} />
                 <a href={section('philosophy')} onClick={() => setMenuOpen(false)}>{t.ourPhilosophy}<ArrowUpRight size={18} /></a>
                 <a href={section('visit')} onClick={() => setMenuOpen(false)}>{t.yourVisit}<ArrowUpRight size={18} /></a>
+                <a href={section('gift-cards')} onClick={() => setMenuOpen(false)}>{t.navGiftCards}<ArrowUpRight size={18} /></a>
                 <SocialLinks className="mobile-nav-social" />
               </motion.nav>
             )}
