@@ -234,6 +234,25 @@ export default function App({ page }: { page?: ServicePage }) {
               </div>
             </section>
 
+            <section id="gift-cards" className="gift-section section-space" aria-labelledby="gift-title">
+              <div className="page-width gift-grid">
+                <Reveal className="gift-visual">
+                  <div className="gift-card" aria-hidden="true">
+                    <img src={asset('images/logo-mark-light-360.webp')} alt="" width="120" height="120" loading="lazy" />
+                    <span className="gift-card-name">Stacy's Esthetics</span>
+                    <span className="gift-card-label">{t.giftCardLabel}</span>
+                  </div>
+                </Reveal>
+                <Reveal className="gift-copy" delay={0.1}>
+                  <p className="eyebrow">{t.giftEyebrow}</p>
+                  <h2 id="gift-title" className="section-title">{t.giftTitle[0]} <em>{t.giftTitle[1]}</em></h2>
+                  <p className="section-description">{t.giftDescription}</p>
+                  <a className="button button-primary" href={studio.giftCardHref} target="_blank" rel="noopener noreferrer">{t.giftButton}<ArrowUpRight size={16} strokeWidth={1.5} /></a>
+                  <p className="gift-note">{t.giftNote}</p>
+                </Reveal>
+              </div>
+            </section>
+
             <section className="closing-section" aria-labelledby="closing-title">
               <Reveal className="closing-content">
                 <Botanical className="closing-botanical" />
@@ -252,7 +271,7 @@ export default function App({ page }: { page?: ServicePage }) {
             <div className="footer-top">
               <div className="footer-brand"><a href={page ? home : '#home'}><BrandLogo variant="footer" /></a><p>{t.footerTagline}</p><SocialLinks /></div>
               <nav className="footer-nav" aria-label={t.services}><p className="footer-label">{t.footerServices}</p>{pages.map((item) => <a key={item.slug} href={servicePath(item.slug, lang)}>{item.name}</a>)}</nav>
-              <nav className="footer-nav" aria-label={t.studioContact}><p className="footer-label">{t.footerMore}</p><button type="button" onClick={() => showDialog({ type: 'studio' })}>{t.studioContact}<ArrowUpRight size={13} /></button><button type="button" onClick={() => showDialog({ type: 'policies', tab: 'booking' })}>{t.bookingPolicies}</button><button type="button" onClick={() => openPlanner()}>{t.yourAppointmentPlan}</button></nav>
+              <nav className="footer-nav" aria-label={t.studioContact}><p className="footer-label">{t.footerMore}</p><button type="button" onClick={() => showDialog({ type: 'studio' })}>{t.studioContact}<ArrowUpRight size={13} /></button><button type="button" onClick={() => showDialog({ type: 'policies', tab: 'booking' })}>{t.bookingPolicies}</button><button type="button" onClick={() => openPlanner()}>{t.yourAppointmentPlan}</button><a href={studio.giftCardHref} target="_blank" rel="noopener noreferrer">{t.footerGiftCards}<ArrowUpRight size={13} /></a></nav>
               <address className="footer-visit"><p className="footer-label">{t.footerVisit}</p><a href={studio.mapsHref} target="_blank" rel="noopener noreferrer">{studio.street}<br />{studio.locality}</a><a href={studio.phoneHref}>{studio.phone}</a><dl className="footer-hours">{studioHours(lang).map((row) => <div key={row.days} style={{ display: 'contents' }}><dt>{row.days}</dt><dd>{row.time}</dd></div>)}</dl></address>
             </div>
             <div className="footer-bottom"><p>&copy; {new Date().getFullYear()} {t.rights}</p><a className="footer-credit" href="https://techathos.com" target="_blank" rel="noopener noreferrer">{t.poweredBy}<img src={asset('images/techathos-helmet.svg')} alt="" width="18" height="18" />TechAthos</a><a href="#main" className="back-to-top">{t.backToTop}<ArrowUp size={14} strokeWidth={1.4} /></a></div>

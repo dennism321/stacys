@@ -712,3 +712,28 @@ svg { flex-shrink: 0; }
 @media (max-width: 560px) {
   .lang-switch-mobile { margin-left: 2px; padding: 5px 8px; min-height: 32px; font-size: 13px; }
 }
+
+/* ---------- eGift cards ---------- */
+.gift-section { background: #f4ece3; }
+.gift-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 90px; align-items: center; }
+.gift-visual { display: flex; justify-content: center; }
+.gift-card { position: relative; width: min(100%, 420px); aspect-ratio: 1.586; border-radius: 20px; padding: 28px 30px; display: flex; flex-direction: column; justify-content: flex-end; color: #f6ece2; background: radial-gradient(120% 90% at 85% 10%, #c99a8d 0%, rgba(201,154,141,0) 55%), linear-gradient(135deg, #7a5c4b 0%, #5a463a 60%, #4a3a30 100%); box-shadow: 0 24px 50px -22px rgba(74,58,48,0.55), inset 0 0 0 1px rgba(255,255,255,0.08); transform: rotate(-4deg); overflow: hidden; }
+.gift-card::after { content: ""; position: absolute; inset: 14px; border: 1px solid rgba(246,236,226,0.28); border-radius: 12px; pointer-events: none; }
+.gift-card img { position: absolute; top: 24px; right: 26px; width: 92px; height: auto; opacity: 0.95; }
+.gift-card-name { font-family: 'Great Vibes', cursive; font-size: 36px; line-height: 1.1; }
+.gift-card-label { margin-top: 8px; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: #e8d6c6; }
+.gift-copy .eyebrow { margin-bottom: 20px; font-size: 12px; }
+.gift-copy .section-title { font-size: 50px; }
+.gift-copy .section-description { margin-top: 22px; max-width: 440px; }
+.gift-copy .button { margin-top: 30px; }
+.gift-note { margin-top: 16px; font-size: 14px; color: #7a6656; }
+@media (max-width: 900px) {
+  .gift-grid { grid-template-columns: 1fr; gap: 48px; }
+  .gift-visual { order: 2; }
+  .gift-copy { text-align: center; }
+  .gift-copy .section-description { margin-left: auto; margin-right: auto; }
+  .gift-copy .section-title { font-size: 42px; }
+  .gift-card { width: min(100%, 340px); padding: 22px 24px; }
+  .gift-card img { width: 72px; top: 20px; right: 20px; }
+  .gift-card-name { font-size: 30px; }
+}

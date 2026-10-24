@@ -7,6 +7,7 @@ export const studio = {
   locality: 'Prospect, CT 06712',
   phone: '914-310-4680',
   phoneHref: 'tel:+19143104680',
+  giftCardHref: 'https://app.squareup.com/gift/ML0E36V8C7E1E/order',
   mapsHref: 'https://www.google.com/maps/search/?api=1&query=26+Union+City+Rd%2C+Prospect%2C+CT+06712',
   hours: [
     { days: 'Monday – Friday', time: '9:30 am – 6:00 pm' },
