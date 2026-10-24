@@ -744,3 +744,17 @@ svg { flex-shrink: 0; }
 @media (min-width: 1151px) { .desktop-nav { gap: 26px; } }
 @media (min-width: 1151px) and (max-width: 1279px) { .desktop-nav { gap: 18px; } .desktop-nav a, .desktop-nav .services-menu-trigger { font-size: 14px; } }
 @media (max-width: 1419px) { .desktop-nav .nav-gift span { display: none; } }
+
+/* Phones: compact Book button and a logo that stays clear of it and the language pill.
+   Spanish pages get their own steps because "Reservar" is wider than "Book". */
+@media (max-width: 560px) {
+  .header-booking { padding-inline: 11px; gap: 6px; }
+  .header-booking svg { display: none; }
+}
+@media (max-width: 440px) { .site-header { --pendant-scale: 0.95; } html[lang="es"] .site-header { --pendant-scale: 0.88; } }
+@media (max-width: 414px) { .site-header { --pendant-scale: 0.85; } html[lang="es"] .site-header { --pendant-scale: 0.79; } }
+@media (max-width: 390px) { .site-header { --pendant-scale: 0.84; } html[lang="es"] .site-header { --pendant-scale: 0.77; } }
+@media (max-width: 375px) { .site-header { --pendant-scale: 0.78; } html[lang="es"] .site-header { --pendant-scale: 0.71; } }
+@media (max-width: 360px) { .site-header { --pendant-scale: 0.69; } html[lang="es"] .site-header { --pendant-scale: 0.62; } }
+@media (max-width: 340px) { .site-header { --pendant-scale: 0.64; } html[lang="es"] .site-header { --pendant-scale: 0.54; } }
+@media (min-width: 441px) and (max-width: 480px) { html[lang="es"] .site-header { --pendant-scale: 0.99; } }
