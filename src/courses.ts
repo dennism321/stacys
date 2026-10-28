@@ -106,8 +106,8 @@ const en: CoursesCopy = {
       tagline: 'Your future in healthcare starts here.',
       intro: 'Train as a Medical Assistant and take the first step toward a stable career with purpose.',
       image: { ...maImage, alt: 'Smiling medical assistant in gray scrubs' },
-      virtual: { count: 4, day: 'Mondays', time: '7:00 PM' },
-      inPerson: { count: 3, day: 'Saturdays', time: '12:00 PM' },
+      virtual: { count: 4, day: 'Mondays', time: '7:00 – 9:00 PM' },
+      inPerson: { count: 3, day: 'Saturdays', time: '12:00 – 4:00 PM' },
       price: 3500,
       deposit: 500,
       learn: [
@@ -128,8 +128,8 @@ const en: CoursesCopy = {
       tagline: 'Your first step toward a career in healthcare.',
       intro: 'Learn the essential skills to become a phlebotomy professional.',
       image: { ...phImage, alt: 'Phlebotomist in purple gloves drawing blood from an arm' },
-      virtual: { count: 2, day: 'Tuesdays', time: '7:00 PM' },
-      inPerson: { count: 3, day: 'Saturdays', time: '12:00 PM' },
+      virtual: { count: 2, day: 'Tuesdays', time: '7:00 – 9:00 PM' },
+      inPerson: { count: 3, day: 'Saturdays', time: '12:00 – 4:00 PM' },
       price: 1500,
       deposit: 500,
       learn: [
@@ -189,8 +189,8 @@ const es: CoursesCopy = {
       tagline: 'Tu futuro en la salud comienza aquí.',
       intro: 'Fórmate como Asistente Médico y da el primer paso hacia una carrera estable y con propósito.',
       image: { ...maImage, alt: 'Asistente médica sonriente con uniforme gris' },
-      virtual: { count: 4, day: 'Lunes', time: '7:00 PM' },
-      inPerson: { count: 3, day: 'Sábados', time: '12:00 PM' },
+      virtual: { count: 4, day: 'Lunes', time: '7:00 – 9:00 PM' },
+      inPerson: { count: 3, day: 'Sábados', time: '12:00 – 4:00 PM' },
       price: 3500,
       deposit: 500,
       learn: [
@@ -211,8 +211,8 @@ const es: CoursesCopy = {
       tagline: 'Tu primer paso hacia una carrera en la salud.',
       intro: 'Aprende las habilidades esenciales para convertirte en un profesional de la flebotomía.',
       image: { ...phImage, alt: 'Flebotomista con guantes morados extrayendo sangre de un brazo' },
-      virtual: { count: 2, day: 'Martes', time: '7:00 PM' },
-      inPerson: { count: 3, day: 'Sábados', time: '12:00 PM' },
+      virtual: { count: 2, day: 'Martes', time: '7:00 – 9:00 PM' },
+      inPerson: { count: 3, day: 'Sábados', time: '12:00 – 4:00 PM' },
       price: 1500,
       deposit: 500,
       learn: [
