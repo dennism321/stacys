@@ -150,7 +150,7 @@ function coursesHtml(lang) {
         "@id": `${url}#${course.id}`,
         name: course.name,
         description: `${course.intro} ${course.learn.map((item) => item.title).join(", ")}.`,
-        inLanguage: lang === "es" ? "es" : "en",
+        inLanguage: "es",
         provider,
         educationalCredentialAwarded: copy.certificate,
         offers: { "@type": "Offer", category: "Paid", price: String(course.price), priceCurrency: "USD", url: `${url}#${course.id}` },

@@ -31,6 +31,9 @@ type CoursesCopy = {
   eyebrow: string;
   h1: [string, string];
   intro: string;
+  /** Note that the classes are taught in Spanish. */
+  languageNote: { title: string; text: string };
+  languageTag: string;
   highlights: { title: string; text: string }[];
   certificateLead: string;
   certificate: string;
@@ -66,10 +69,12 @@ const en: CoursesCopy = {
   name: 'Certification courses',
   menuBlurb: 'Medical Assistant and Phlebotomy',
   title: "Medical Assistant & Phlebotomy Courses in Prospect, CT | Stacy's Esthetics",
-  description: 'State-approved Medical Assistant ($3,500, 6 classes) and Phlebotomy ($1,500, 5 classes) certification courses in Prospect, CT. Virtual and in-person classes, $500 deposit to enroll.',
+  description: 'State-approved Medical Assistant ($3,500, 6 classes) and Phlebotomy ($1,500, 5 classes) certification courses in Prospect, CT. Virtual and in-person classes, $500 deposit to enroll. Taught in Spanish.',
   eyebrow: "CERTIFICATION COURSES · STACY'S ESTHETICS",
   h1: ['Your future in healthcare', 'starts here.'],
   intro: 'Train as a Medical Assistant or Phlebotomist with a certified, experienced instructor. Study from home and practice in person, and take your first step toward a stable career with purpose.',
+  languageNote: { title: 'Courses are taught in Spanish', text: 'All classes, virtual and in person, are given in Spanish.' },
+  languageTag: 'Taught in Spanish',
   highlights: [
     { title: 'Quality training', text: 'A certified, experienced instructor.' },
     { title: 'Flexible schedule', text: 'Study from home and in person.' },
@@ -149,10 +154,12 @@ const es: CoursesCopy = {
   name: 'Cursos de certificación',
   menuBlurb: 'Asistente Médico y Flebotomía',
   title: "Cursos de Asistente Médico y Flebotomía en Prospect, CT | Stacy's Esthetics",
-  description: 'Cursos con certificado avalado por el estado: Asistente Médico ($3,500, 6 clases) y Flebotomía ($1,500, 5 clases) en Prospect, CT. Clases virtuales y presenciales, depósito de $500 para inscribirte.',
+  description: 'Cursos con certificado avalado por el estado: Asistente Médico ($3,500, 6 clases) y Flebotomía ($1,500, 5 clases) en Prospect, CT. Clases virtuales y presenciales, depósito de $500 para inscribirte. Clases en español.',
   eyebrow: "CURSOS DE CERTIFICACIÓN · STACY'S ESTHETICS",
   h1: ['Tu futuro en la salud', 'comienza aquí.'],
   intro: 'Fórmate como Asistente Médico o en Flebotomía con una instructora certificada y con experiencia. Estudia desde casa, practica en persona y da el primer paso hacia una carrera estable y con propósito.',
+  languageNote: { title: 'Los cursos se imparten en español', text: 'Todas las clases, virtuales y presenciales, son en español.' },
+  languageTag: 'Clases en español',
   highlights: [
     { title: 'Formación de calidad', text: 'Instructora certificada y con experiencia.' },
     { title: 'Horarios flexibles', text: 'Estudia desde casa y presencial.' },

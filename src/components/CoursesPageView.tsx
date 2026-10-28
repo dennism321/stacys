@@ -1,5 +1,5 @@
 import {
-  Accessibility, Activity, ArrowUpRight, Award, Biohazard, BookOpen, BriefcaseMedical, Building2, CalendarClock, CircleDollarSign,
+  Accessibility, Activity, ArrowUpRight, Award, MessageCircle, Biohazard, BookOpen, BriefcaseMedical, Building2, CalendarClock, CircleDollarSign,
   ClipboardCheck, Clock, Droplet, FileText, FolderOpen, GraduationCap, HandHeart, HeartPulse, Laptop, MapPin, Phone,
   PersonStanding, ShieldCheck, Stethoscope, Syringe, TestTube, TestTubes, UserRound, Users, type LucideIcon,
 } from 'lucide-react';
@@ -36,6 +36,7 @@ function CourseSection({ course, flip }: { course: Course; flip: boolean }) {
           <p className="eyebrow">{copy.name.toUpperCase()}</p>
           <h2 id={`${course.id}-title`} className="section-title">{course.name}</h2>
           <p className="course-tagline">{course.tagline}</p>
+          <p className="course-language"><MessageCircle size={14} strokeWidth={1.7} aria-hidden="true" />{copy.languageTag}</p>
           <p className="course-intro">{course.intro}</p>
 
           <div className="course-schedule">
@@ -117,6 +118,10 @@ export default function CoursesPageView() {
             <p className="eyebrow">{copy.eyebrow}</p>
             <h1 id="courses-title">{copy.h1[0]} <em>{copy.h1[1]}</em></h1>
             <p className="courses-intro">{copy.intro}</p>
+            <div className="courses-language" role="note">
+              <IconBadge icon={MessageCircle} size="sm" />
+              <div><p className="courses-language-title">{copy.languageNote.title}</p><p>{copy.languageNote.text}</p></div>
+            </div>
             <ul className="courses-jump">
               {copy.courses.map((course) => (
                 <li key={course.id}>
