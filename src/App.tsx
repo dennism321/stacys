@@ -10,6 +10,8 @@ import SocialLinks from './components/SocialLinks';
 import { MobileServicesMenu, ServicesMenu } from './components/ServicesMenu';
 import ServicePageView from './components/ServicePageView';
 import SquareBooking from './components/SquareBooking';
+import CoursesPageView from './components/CoursesPageView';
+import { COURSES_SLUG, coursesCopy } from './courses';
 import LangSwitch from './components/LangSwitch';
 import { asset, homePath, homeSection, photoSrcSet, servicePath } from './paths';
 import { localizedPages, type ServicePage } from './servicePages';
@@ -35,8 +37,8 @@ function Botanical({ className = '' }: { className?: string }) {
   );
 }
 
-/** One shell for every page: the home page, or a service page when `page` is set (already localized). */
-export default function App({ page }: { page?: ServicePage }) {
+/** One shell for every page: the home page, a service page when `page` is set (already localized), or the courses page. */
+export default function App({ page, courses = false }: { page?: ServicePage; courses?: boolean }) {
   const lang = useLang();
   const t = useT();
   const pages = localizedPages(lang);
@@ -105,7 +107,9 @@ export default function App({ page }: { page?: ServicePage }) {
 
   const heroItem = { hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0 } };
   // Section links point at the home page when we're on a service page.
-  const section = (id: string) => (page ? homeSection(id, lang) : `#${id}`);
+  const subpage = Boolean(page || courses);
+  const slug = courses ? COURSES_SLUG : page?.slug;
+  const section = (id: string) => (subpage ? homeSection(id, lang) : `#${id}`);
 
   return (
     <>
@@ -117,7 +121,7 @@ export default function App({ page }: { page?: ServicePage }) {
               <button type="button" id="mobile-menu-toggle" className="menu-toggle" aria-label={menuOpen ? t.closeNav : t.openNav} aria-expanded={menuOpen} aria-controls="mobile-navigation" onClick={() => setMenuOpen(!menuOpen)}>
                 {menuOpen ? <X size={23} strokeWidth={1.5} /> : <Menu size={23} strokeWidth={1.5} />}
               </button>
-              <LangSwitch slug={page?.slug} className="lang-switch-mobile" />
+              <LangSwitch slug={slug} className="lang-switch-mobile" />
               <nav className="desktop-nav" aria-label={t.mainNav}>
                 <ServicesMenu />
                 <a href={section('philosophy')}>{t.ourPhilosophy}</a>
@@ -125,12 +129,12 @@ export default function App({ page }: { page?: ServicePage }) {
                 <a className="nav-gift" href={section('gift-cards')} title={t.navGiftCards} aria-label={t.navGiftCards}><Gift size={15} strokeWidth={1.5} aria-hidden="true" /><span>{t.navGiftShort}</span></a>
               </nav>
             </div>
-            <a href={page ? home : '#home'} className="brand-pendant" onClick={() => setMenuOpen(false)}>
+            <a href={subpage ? home : '#home'} className="brand-pendant" onClick={() => setMenuOpen(false)}>
               <BrandLogo />
             </a>
             <div className="header-side header-right">
               <SocialLinks className="header-social" />
-              <LangSwitch slug={page?.slug} className="lang-switch-desktop" />
+              <LangSwitch slug={slug} className="lang-switch-desktop" />
               <button type="button" className="button button-primary header-booking" onClick={() => openPlanner()}>
                 <span className="desktop-book-label">{savedDraft ? t.viewPlan : t.bookAppointment}</span>
                 <span className="mobile-book-label">{savedDraft ? t.yourPlan : t.book}</span>
@@ -145,6 +149,7 @@ export default function App({ page }: { page?: ServicePage }) {
                 <a href={section('philosophy')} onClick={() => setMenuOpen(false)}>{t.ourPhilosophy}<ArrowUpRight size={18} /></a>
                 <a href={section('visit')} onClick={() => setMenuOpen(false)}>{t.yourVisit}<ArrowUpRight size={18} /></a>
                 <a href={section('gift-cards')} onClick={() => setMenuOpen(false)}>{t.navGiftCards}<ArrowUpRight size={18} /></a>
+                <a href={servicePath(COURSES_SLUG, lang)} onClick={() => setMenuOpen(false)}>{coursesCopy(lang).name}<ArrowUpRight size={18} /></a>
                 <SocialLinks className="mobile-nav-social" />
               </motion.nav>
             )}
@@ -152,7 +157,9 @@ export default function App({ page }: { page?: ServicePage }) {
         </header>
 
         <main id="main">
-          {page ? (
+          {courses ? (
+            <CoursesPageView />
+          ) : page ? (
             <ServicePageView page={page} onBook={() => (page.squareBooking ? showDialog({ type: 'square' }) : openPlanner(page.slug))} />
           ) : (
             <>
@@ -271,9 +278,9 @@ export default function App({ page }: { page?: ServicePage }) {
         <footer className="site-footer">
           <div className="page-width">
             <div className="footer-top">
-              <div className="footer-brand"><a href={page ? home : '#home'}><BrandLogo variant="footer" /></a><p>{t.footerTagline}</p><SocialLinks /></div>
+              <div className="footer-brand"><a href={subpage ? home : '#home'}><BrandLogo variant="footer" /></a><p>{t.footerTagline}</p><SocialLinks /></div>
               <nav className="footer-nav" aria-label={t.services}><p className="footer-label">{t.footerServices}</p>{pages.map((item) => <a key={item.slug} href={servicePath(item.slug, lang)}>{item.name}</a>)}</nav>
-              <nav className="footer-nav" aria-label={t.studioContact}><p className="footer-label">{t.footerMore}</p><button type="button" onClick={() => showDialog({ type: 'studio' })}>{t.studioContact}<ArrowUpRight size={13} /></button><button type="button" onClick={() => showDialog({ type: 'policies', tab: 'booking' })}>{t.bookingPolicies}</button><button type="button" onClick={() => openPlanner()}>{t.yourAppointmentPlan}</button><a href={studio.giftCardHref} target="_blank" rel="noopener noreferrer">{t.footerGiftCards}<ArrowUpRight size={13} /></a></nav>
+              <nav className="footer-nav" aria-label={t.studioContact}><p className="footer-label">{t.footerMore}</p><button type="button" onClick={() => showDialog({ type: 'studio' })}>{t.studioContact}<ArrowUpRight size={13} /></button><button type="button" onClick={() => showDialog({ type: 'policies', tab: 'booking' })}>{t.bookingPolicies}</button><button type="button" onClick={() => openPlanner()}>{t.yourAppointmentPlan}</button><a href={studio.giftCardHref} target="_blank" rel="noopener noreferrer">{t.footerGiftCards}<ArrowUpRight size={13} /></a><a href={servicePath(COURSES_SLUG, lang)}>{coursesCopy(lang).name}</a></nav>
               <address className="footer-visit"><p className="footer-label">{t.footerVisit}</p><a href={studio.mapsHref} target="_blank" rel="noopener noreferrer">{studio.street}<br />{studio.locality}</a><a href={studio.phoneHref}>{studio.phone}</a><dl className="footer-hours">{studioHours(lang).map((row) => <div key={row.days} style={{ display: 'contents' }}><dt>{row.days}</dt><dd>{row.time}</dd></div>)}</dl></address>
             </div>
             <div className="footer-bottom"><p>&copy; {new Date().getFullYear()} {t.rights}</p><a className="footer-credit" href="https://techathos.com" target="_blank" rel="noopener noreferrer">{t.poweredBy}<img src={asset('images/techathos-helmet.svg')} alt="" width="18" height="18" />TechAthos</a><a href="#main" className="back-to-top">{t.backToTop}<ArrowUp size={14} strokeWidth={1.4} /></a></div>

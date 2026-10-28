@@ -1,5 +1,6 @@
 import { useEffect, useId, useRef, useState } from 'react';
-import { ArrowRight, ChevronDown } from 'lucide-react';
+import { ArrowRight, ChevronDown, GraduationCap } from 'lucide-react';
+import { COURSES_SLUG, coursesCopy } from '../courses';
 import { homeSection, servicePath } from '../paths';
 import { localizedPages } from '../servicePages';
 import { useLang, useT } from '../i18n';
@@ -62,6 +63,12 @@ export function ServicesMenu() {
               </a>
             </li>
           ))}
+          <li className="services-menu-courses">
+            <a href={servicePath(COURSES_SLUG, lang)}>
+              <span className="services-menu-name"><GraduationCap size={16} strokeWidth={1.5} aria-hidden="true" />{coursesCopy(lang).name}</span>
+              <span className="services-menu-blurb">{coursesCopy(lang).menuBlurb}</span>
+            </a>
+          </li>
         </ul>
         <a className="services-menu-all" href={homeSection('services', lang)} onClick={() => setOpen(false)}>
           {t.viewAllServices}<ArrowRight size={13} strokeWidth={1.5} />
@@ -90,6 +97,7 @@ export function MobileServicesMenu({ onNavigate }: { onNavigate: () => void }) {
             <a href={servicePath(page.slug, lang)} onClick={onNavigate}>{page.name}</a>
           </li>
         ))}
+        <li><a href={servicePath(COURSES_SLUG, lang)} onClick={onNavigate}>{coursesCopy(lang).name}</a></li>
         <li><a href={homeSection('services', lang)} onClick={onNavigate}>{t.viewAllServices}</a></li>
       </ul>
     </div>

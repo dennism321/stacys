@@ -3,7 +3,7 @@
 // Also writes a bilingual sitemap.xml and llms.txt.
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 
-const { render, faqsFor, googleReviews, localizedPages, serviceFaqs, servicePages, startingPrice, studio, ui, SITE_URL } =
+const { render, COURSES_SLUG, coursesCopy, faqsFor, googleReviews, localizedPages, serviceFaqs, servicePages, startingPrice, studio, ui, SITE_URL } =
   await import("../dist-ssr/entry-server.js");
 const dist = new URL("../dist/", import.meta.url);
 const template = await readFile(new URL("index.html", dist), "utf8");
@@ -88,13 +88,10 @@ const alternates = (slug) =>
 
 const jsonLdScript = (data) => `    <script type="application/ld+json">\n${JSON.stringify(data, null, 2).replace(/</g, "\\u003c")}\n    </script>`;
 
-function pageHtml(page, lang) {
+/** Renders a page and fills in its language, title, description, canonical URL, alternates, and sharing tags. */
+function shellHtml(lang, slug, title, description) {
   const t = ui[lang];
-  const slug = page?.slug;
   const url = urlFor(lang, slug);
-  const title = page ? page.title : t.homeTitle;
-  const description = page ? page.description : t.homeDescription;
-
   let html = template.replace(marker, `<div id="root">${render(slug, lang)}</div>`);
   html = html.replace('<html lang="en">', `<html lang="${t.htmlLang}">`);
   html = html.replace(/<title>[\s\S]*?<\/title>/, `<title>${escapeAttr(title)}</title>`);
@@ -107,6 +104,14 @@ function pageHtml(page, lang) {
   html = setMeta(html, /(<meta property="og:description" content=")[^"]*(")/, description);
   html = setMeta(html, /(<meta name="twitter:title" content=")[^"]*(")/, title);
   html = setMeta(html, /(<meta name="twitter:description" content=")[^"]*(")/, description);
+  return html;
+}
+
+function pageHtml(page, lang) {
+  const t = ui[lang];
+  const slug = page?.slug;
+  const url = urlFor(lang, slug);
+  const html = shellHtml(lang, slug, page ? page.title : t.homeTitle, page ? page.description : t.homeDescription);
 
   if (page) {
     // Service pages: breadcrumbs, the service and its prices, and the FAQ (replaces the home BeautySalon block).
@@ -123,6 +128,43 @@ function pageHtml(page, lang) {
   return html.replace("</head>", `${jsonLdScript(homeLd)}\n  </head>`);
 }
 
+/** The certification courses page: breadcrumbs plus a Course entry (with price and schedule) for each course. */
+function coursesHtml(lang) {
+  const t = ui[lang];
+  const copy = coursesCopy(lang);
+  const url = urlFor(lang, COURSES_SLUG);
+  const html = shellHtml(lang, COURSES_SLUG, copy.title, copy.description);
+  const provider = { "@type": "EducationalOrganization", name: "Stacy's Esthetics", url: SITE_URL, telephone: "+1-914-310-4680" };
+  const data = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: t.home, item: urlFor(lang) },
+          { "@type": "ListItem", position: 2, name: copy.name, item: url },
+        ],
+      },
+      ...copy.courses.map((course) => ({
+        "@type": "Course",
+        "@id": `${url}#${course.id}`,
+        name: course.name,
+        description: `${course.intro} ${course.learn.map((item) => item.title).join(", ")}.`,
+        inLanguage: lang === "es" ? "es" : "en",
+        provider,
+        educationalCredentialAwarded: copy.certificate,
+        offers: { "@type": "Offer", category: "Paid", price: String(course.price), priceCurrency: "USD", url: `${url}#${course.id}` },
+        hasCourseInstance: {
+          "@type": "CourseInstance",
+          courseMode: "Blended",
+          location: { "@type": "Place", name: "Stacy's Esthetics", address: { "@type": "PostalAddress", streetAddress: studio.street, addressLocality: "Prospect", addressRegion: "CT", postalCode: "06712", addressCountry: "US" } },
+        },
+      })),
+    ],
+  };
+  return html.replace(/    <script type="application\/ld\+json">[\s\S]*?<\/script>/, jsonLdScript(data));
+}
+
 let count = 0;
 for (const lang of LANGS) {
   const root = new URL(lang === "es" ? "es/" : "", dist);
@@ -135,11 +177,15 @@ for (const lang of LANGS) {
     await writeFile(new URL("index.html", dir), pageHtml(page, lang));
     count++;
   }
+  const coursesDir = new URL(`${COURSES_SLUG}/`, root);
+  await mkdir(coursesDir, { recursive: true });
+  await writeFile(new URL("index.html", coursesDir), coursesHtml(lang));
+  count++;
 }
 
 // Sitemap with hreflang alternates for every page in both languages.
 const today = new Date().toISOString().slice(0, 10);
-const slugs = [undefined, ...servicePages.map((page) => page.slug)];
+const slugs = [undefined, ...servicePages.map((page) => page.slug), COURSES_SLUG];
 const entries = slugs.flatMap((slug) =>
   LANGS.map(
     (lang) => `  <url>
@@ -176,6 +222,9 @@ const llms = [
     const from = startingPrice(page);
     return `- [${page.h1}](${urlFor("en", page.slug)}): ${page.tagline}${from !== undefined ? ` From $${from}.` : ""}`;
   }),
+  "",
+  "## Certification courses",
+  ...coursesCopy("en").courses.map((course) => `- [${course.name}](${urlFor("en", COURSES_SLUG)}#${course.id}): ${course.virtual.count} virtual + ${course.inPerson.count} in-person classes, $${course.price.toLocaleString("en-US")} total ($${course.deposit} deposit to enroll). State-approved certificate.`),
   "",
   "## Servicios en español",
   ...localizedPages("es").map((page) => `- [${page.h1}](${urlFor("es", page.slug)}): ${page.tagline}`),
