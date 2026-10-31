@@ -4,6 +4,9 @@ import { asset } from './paths';
 /** URL slug of the certification courses page (/courses/ and /es/courses/). */
 export const COURSES_SLUG = 'courses';
 
+/** Square booking page for the courses, where students pay the $500 deposit to reserve a spot. */
+export const courseBookingHref = 'https://app.squareup.com/appointments/book/tlqa7qonue3d6i/L2A59ABR9VW2A/start';
+
 export type CourseIcon =
   | 'stethoscope' | 'pressure' | 'anatomy' | 'transfer' | 'terminology' | 'ekg' | 'syringe' | 'professional'
   | 'tubes' | 'venipuncture' | 'biohazard' | 'tube' | 'records' | 'care';

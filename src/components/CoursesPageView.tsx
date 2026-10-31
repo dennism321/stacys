@@ -6,7 +6,7 @@ import {
 import { studio } from '../data';
 import { useLang, useT } from '../i18n';
 import { asset, homePath } from '../paths';
-import { coursesCopy, instagramHref, whatsappHref, type Course, type CourseIcon } from '../courses';
+import { courseBookingHref, coursesCopy, instagramHref, whatsappHref, type Course, type CourseIcon } from '../courses';
 import Reveal from './Reveal';
 
 const learnIcons: Record<CourseIcon, LucideIcon> = {
@@ -75,7 +75,7 @@ function CourseSection({ course, flip }: { course: Course; flip: boolean }) {
           </div>
 
           <div className="course-actions">
-            <a className="button button-primary" href={whatsappHref(course.whatsappText)} target="_blank" rel="noopener noreferrer">{copy.reserve}<ArrowUpRight size={16} strokeWidth={1.5} /></a>
+            <a className="button button-primary" href={courseBookingHref} target="_blank" rel="noopener noreferrer">{copy.reserve}<ArrowUpRight size={16} strokeWidth={1.5} /></a>
             <a className="sp-call" href={studio.phoneHref}><Phone size={15} strokeWidth={1.5} />{studio.phone}</a>
           </div>
         </Reveal>
