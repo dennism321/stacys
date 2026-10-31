@@ -314,6 +314,11 @@ export const servicePages: ServicePage[] = [
   {
     slug: 'waxing',
     faqName: 'waxing',
+    squareBooking: {
+      // From the studio's Square Appointments embed code (widget ppli9gbumj2lnc, location L2A59ABR9VW2A).
+      widgetUrl: 'https://app.squareup.com/appointments/buyer/widget/ppli9gbumj2lnc/L2A59ABR9VW2A',
+      bookUrl: 'https://app.squareup.com/appointments/book/ppli9gbumj2lnc/L2A59ABR9VW2A/start',
+    },
     tile: { src: asset('images/waxing.webp'), alt: "A wax strip being smoothed onto a leg in soft natural light", caption: 'Smooth, in just minutes.' },
     image: { src: asset('images/waxing.webp'), alt: "A wax strip being smoothed onto a leg in soft natural light" },
     name: 'Waxing',
