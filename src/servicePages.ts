@@ -281,9 +281,9 @@ export const servicePages: ServicePage[] = [
     slug: 'laser-hair-removal',
     faqName: 'laser hair removal',
     squareBooking: {
-      // From the studio's Square Appointments embed code (widget ppli9gbumj2lnc, location L2A59ABR9VW2A).
-      widgetUrl: 'https://app.squareup.com/appointments/buyer/widget/ppli9gbumj2lnc/L2A59ABR9VW2A',
-      bookUrl: 'https://app.squareup.com/appointments/book/ppli9gbumj2lnc/L2A59ABR9VW2A/start',
+      // From the studio's Square Appointments embed code (widget n4pvlxgme77f76, location L2A59ABR9VW2A).
+      widgetUrl: 'https://app.squareup.com/appointments/buyer/widget/n4pvlxgme77f76/L2A59ABR9VW2A',
+      bookUrl: 'https://app.squareup.com/appointments/book/n4pvlxgme77f76/L2A59ABR9VW2A/start',
     },
     tile: { src: asset('images/laser-hair-removal.webp'), alt: "A cosmetologist performing laser hair removal on a client's leg in a warm spa", caption: 'Smooth skin that lasts.' },
     image: { src: asset('images/laser-hair-removal.webp'), alt: "A cosmetologist performing laser hair removal on a client's leg in a warm spa" },
