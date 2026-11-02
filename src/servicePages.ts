@@ -115,6 +115,7 @@ export const servicePages: ServicePage[] = [
           { name: 'Divine Facial', meta: ['60 min' /* estimated */, 'Normal to dry skin'], price: '$95', amount: 95, description: 'Exfoliation, steam, extractions in the nose area only (if needed), hydration, and a relaxing facial massage for soft, glowing skin.' },
           { name: 'Be Kind to Yourself Facial', meta: ['75 min' /* estimated */, 'Oily or acne-prone skin'], price: '$120', amount: 120, description: 'Deep cleansing, double exfoliation, extractions across the whole face, and high-frequency treatment.' },
           { name: 'Teen Facial', meta: ['45 min' /* estimated */, 'Ages 13–17'], price: '$85', amount: 85, description: 'Gentle care for oily skin, clogged pores, or mild breakouts. Includes cleansing, gentle exfoliation, extractions if needed, and a soothing hydrating mask.' },
+          { name: 'Couples Facial', meta: ['For two'], price: 'From $190', amount: 190, priceFrom: true, description: 'Share a relaxing facial side by side, with each treatment matched to your own skin.' },
         ],
       },
       {

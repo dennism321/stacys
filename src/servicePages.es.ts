@@ -76,6 +76,7 @@ export const servicePagesEs: Record<string, EsPage> = {
           { name: 'Divine Facial', meta: ['60 min', 'Piel normal a seca'], description: 'Exfoliación, vapor, extracciones solo en la zona de la nariz (si es necesario), hidratación y un relajante masaje facial para una piel suave y luminosa.' },
           { name: 'Be Kind to Yourself Facial', meta: ['75 min', 'Piel grasa o con tendencia al acné'], description: 'Limpieza profunda, doble exfoliación, extracciones en todo el rostro y tratamiento de alta frecuencia.' },
           { name: 'Facial para adolescentes', meta: ['45 min', 'De 13 a 17 años'], description: 'Cuidado suave para piel grasa, poros obstruidos o brotes leves. Incluye limpieza, exfoliación suave, extracciones si es necesario y una mascarilla hidratante calmante.' },
+          { name: 'Facial en pareja', meta: ['Para dos'], price: 'Desde $190', description: 'Disfruten de un facial relajante uno al lado del otro, con cada tratamiento adaptado a su propia piel.' },
         ],
       },
       {
