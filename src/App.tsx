@@ -11,6 +11,7 @@ import { MobileServicesMenu, ServicesMenu } from './components/ServicesMenu';
 import ServicePageView from './components/ServicePageView';
 import SquareBooking from './components/SquareBooking';
 import CoursesPageView from './components/CoursesPageView';
+import CoursesTeaser from './components/CoursesTeaser';
 import { COURSES_SLUG, coursesCopy } from './courses';
 import LangSwitch from './components/LangSwitch';
 import { asset, homePath, homeSection, photoSrcSet, servicePath } from './paths';
@@ -204,6 +205,8 @@ export default function App({ page, courses = false }: { page?: ServicePage; cou
                 <Reveal className="services-footnote"><p>{t.servicesFootnote}</p></Reveal>
               </div>
             </section>
+
+            <CoursesTeaser />
 
             <ReviewsSection />
 

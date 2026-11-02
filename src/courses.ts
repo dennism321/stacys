@@ -37,6 +37,8 @@ type CoursesCopy = {
   /** Note that the classes are taught in Spanish. */
   languageNote: { title: string; text: string };
   languageTag: string;
+  /** The courses teaser on the home page. */
+  home: { eyebrow: string; title: [string, string]; text: string; button: string };
   highlights: { title: string; text: string }[];
   certificateLead: string;
   certificate: string;
@@ -78,6 +80,12 @@ const en: CoursesCopy = {
   intro: 'Train as a Medical Assistant or Phlebotomist with a certified, experienced instructor. Study from home and practice in person, and take your first step toward a stable career with purpose.',
   languageNote: { title: 'Courses are taught in Spanish', text: 'All classes, virtual and in person, are given in Spanish.' },
   languageTag: 'Taught in Spanish',
+  home: {
+    eyebrow: 'CERTIFICATION COURSES',
+    title: ['Start your career', 'in healthcare.'],
+    text: 'Become a Medical Assistant or Phlebotomist with a certified, experienced instructor. Virtual and in-person classes, a state-approved certificate / license, and a $500 deposit to reserve your spot.',
+    button: 'View the courses',
+  },
   highlights: [
     { title: 'Quality training', text: 'A certified, experienced instructor.' },
     { title: 'Flexible schedule', text: 'Study from home and in person.' },
@@ -163,6 +171,12 @@ const es: CoursesCopy = {
   intro: 'Fórmate como Asistente Médico o en Flebotomía con una instructora certificada y con experiencia. Estudia desde casa, practica en persona y da el primer paso hacia una carrera estable y con propósito.',
   languageNote: { title: 'Los cursos se imparten en español', text: 'Todas las clases, virtuales y presenciales, son en español.' },
   languageTag: 'Clases en español',
+  home: {
+    eyebrow: 'CURSOS DE CERTIFICACIÓN',
+    title: ['Comienza tu carrera', 'en la salud.'],
+    text: 'Fórmate como Asistente Médico o en Flebotomía con una instructora certificada y con experiencia. Clases virtuales y presenciales, certificado / licencia avalados por el estado y un depósito de $500 para reservar tu cupo.',
+    button: 'Ver los cursos',
+  },
   highlights: [
     { title: 'Formación de calidad', text: 'Instructora certificada y con experiencia.' },
     { title: 'Horarios flexibles', text: 'Estudia desde casa y presencial.' },
