@@ -41,6 +41,7 @@ export const servicePagesEs: Record<string, EsPage> = {
           { name: 'Masaje sueco', description: 'Tómate un descanso del estrés con una presión suave y relajante. Relaja tu cuerpo y recarga energía.' },
           { name: 'Masaje de tejido profundo', description: '¿Acumulas tensión en el cuello, los hombros o la espalda? Una presión firme y enfocada ayuda a liberar los nudos musculares profundos.' },
           { name: 'Masaje de alivio localizado', description: 'Regálate un momento para ti. Elige dos zonas: espalda, hombros, brazos, manos, cuello, piernas o pies.' },
+          { name: 'Masaje en pareja', meta: ['Por pareja'], description: 'Relájense uno al lado del otro con un masaje sueco o de tejido profundo, pensado para dos.' },
         ],
       },
       {

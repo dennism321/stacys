@@ -72,6 +72,7 @@ export const servicePages: ServicePage[] = [
           { name: 'Swedish Massage', meta: ['60 min'], price: '$85', amount: 85, description: 'Take a break from stress with gentle, soothing pressure. Relax your body and recharge.' },
           { name: 'Deep Tissue Massage', meta: ['60 min'], price: '$85', amount: 85, description: 'Carrying tension in your neck, shoulders, or back? Firm, focused pressure helps release deep muscle knots.' },
           { name: 'Focused Relief Massage', meta: ['30 min'], price: '$45', amount: 45, description: 'Take a moment for yourself. Choose two areas: back, shoulders, arms, hands, neck, legs, or feet.' },
+          { name: 'Couples Massage', meta: ['Per couple'], price: '$170', amount: 170, description: 'Relax side by side with a Swedish or deep tissue massage, made for two.' },
         ],
       },
       {
