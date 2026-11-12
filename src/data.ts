@@ -9,6 +9,8 @@ export const studio = {
   phoneHref: 'tel:+19143104680',
   giftCardHref: 'https://app.squareup.com/gift/ML0E36V8C7E1E/order',
   mapsHref: 'https://www.google.com/maps/search/?api=1&query=26+Union+City+Rd%2C+Prospect%2C+CT+06712',
+  /** Towns the studio serves: shown in the footer and used in structured data. Keep index.html in sync. */
+  areaServed: ['Prospect', 'Waterbury', 'Naugatuck', 'Cheshire', 'Wolcott', 'Beacon Falls', 'Bethany'],
   hours: [
     { days: 'Monday – Friday', time: '9:30 am – 6:00 pm' },
     { days: 'Saturday', time: '9:30 am – 4:00 pm' },

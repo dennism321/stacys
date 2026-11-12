@@ -25,7 +25,7 @@ export const servicePagesEs: Record<string, EsPage> = {
     faqName: 'un masaje',
     blurb: 'Sueco, de tejido profundo y de alivio localizado',
     title: "Masajes en Prospect, CT | Stacy's Esthetics",
-    description: 'Masaje sueco, de tejido profundo y de alivio localizado en Prospect, CT, desde $45. Añade piedras calientes, exfoliación corporal o un facial de espalda.',
+    description: 'Masaje sueco, de tejido profundo, en pareja y de alivio localizado en Prospect, CT, desde $45. Añade piedras calientes, exfoliación o un facial de espalda.',
     h1: 'Masajes',
     tagline: 'Relájate, libera la tensión y recupera el equilibrio.',
     intro: [
@@ -60,7 +60,7 @@ export const servicePagesEs: Record<string, EsPage> = {
     faqName: 'un facial',
     blurb: 'Faciales personalizados y microagujas',
     title: "Faciales y microagujas en Prospect, CT | Stacy's Esthetics",
-    description: 'Faciales personalizados para piel seca, grasa, con acné y adolescente, además de faciales con microagujas con PRP y PDRN en Prospect, CT. Desde $85.',
+    description: 'Faciales personalizados para cada tipo de piel, faciales en pareja y faciales con microagujas con PRP y PDRN en Prospect, CT. Desde $85.',
     h1: 'Faciales',
     tagline: 'Cuidado de la piel personalizado para cada tipo de piel.',
     intro: [
@@ -178,7 +178,7 @@ export const servicePagesEs: Record<string, EsPage> = {
     faqName: 'el drenaje linfático postoperatorio',
     blurb: 'Drenaje linfático después de la cirugía',
     title: "Drenaje linfático postoperatorio en Prospect, CT | Stacy's Esthetics",
-    description: 'Recuperación postoperatoria en Prospect, CT: masaje de drenaje linfático manual después de la cirugía, con ultrasonido y terapia de luz LED. Sesiones individuales y paquetes.',
+    description: 'Recuperación postoperatoria en Prospect, CT: drenaje linfático manual después de la cirugía, con ultrasonido y luz LED. Sesiones individuales y paquetes.',
     h1: 'Recuperación postoperatoria',
     tagline: 'Cuidado suave y especializado para apoyar tu recuperación después de la cirugía.',
     intro: [

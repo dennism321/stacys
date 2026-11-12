@@ -11,6 +11,7 @@ const marker = '<div id="root"></div>';
 if (!template.includes(marker)) throw new Error(`Could not find ${marker} in dist/index.html`);
 
 const LANGS = ["en", "es"];
+const AREA_SERVED = studio.areaServed.map((town) => ({ "@type": "City", name: `${town}, CT` }));
 const urlFor = (lang, slug) => `${SITE_URL}${lang === "es" ? "es/" : ""}${slug ? `${slug}/` : ""}`;
 
 const escapeAttr = (value) => value.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
@@ -69,7 +70,7 @@ function structuredData(page, url, lang) {
         description: page.description,
         url,
         inLanguage: t.locale,
-        areaServed: "Prospect, CT",
+        areaServed: AREA_SERVED,
         provider,
         hasOfferCatalog: { "@type": "OfferCatalog", name: t.menuAndPrices(page.name), itemListElement: offers },
       },

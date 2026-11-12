@@ -57,7 +57,7 @@ export const servicePages: ServicePage[] = [
     name: 'Massage Therapy',
     blurb: 'Swedish, deep tissue, and focused relief',
     title: "Massage Therapy in Prospect, CT | Stacy's Esthetics",
-    description: 'Swedish, deep tissue, and focused relief massage in Prospect, CT, from $45. Add hot stones, a full body scrub, or a back facial.',
+    description: 'Swedish, deep tissue, couples, and focused relief massage in Prospect, CT, from $45. Add hot stones, a full body scrub, or a back facial.',
     h1: 'Massage Therapy',
     tagline: 'Unwind, release tension, and restore balance.',
     intro: [
@@ -100,7 +100,7 @@ export const servicePages: ServicePage[] = [
     name: 'Facials',
     blurb: 'Custom facials and microneedling',
     title: "Facials & Microneedling in Prospect, CT | Stacy's Esthetics",
-    description: 'Custom facials for dry, oily, acne-prone, and teen skin, plus PRP and PDRN microneedling facials in Prospect, CT. From $85.',
+    description: 'Custom facials for every skin type, couples facials, and PRP and PDRN microneedling facials in Prospect, CT. From $85.',
     h1: 'Facials',
     tagline: 'Customised skin care for every skin type.',
     intro: [
