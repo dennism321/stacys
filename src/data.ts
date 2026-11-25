@@ -1,6 +1,17 @@
 import { findServicePage } from './servicePages';
 import type { Lang } from './i18n';
 
+/**
+ * Black Friday pop-up. It shows once per visit until `endsAt`, and never on the pages in `skip`
+ * (the courses and post-op are not part of the sale). Set `endsAt` to a past date to turn it off.
+ */
+export const promo = {
+  id: 'black-friday-2026',
+  startsAt: '2026-11-26T00:00:00-05:00',
+  endsAt: '2026-12-01T00:00:00-05:00', // the sale runs November 26–30 (Eastern time)
+  skip: ['courses', 'post-op-recovery', 'laser-hair-removal'],
+};
+
 /** Studio contact details, as published on the studio's Wix site. Keep index.html's JSON-LD in sync. */
 export const studio = {
   street: '26 Union City Rd.',

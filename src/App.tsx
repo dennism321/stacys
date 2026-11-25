@@ -12,19 +12,21 @@ import ServicePageView from './components/ServicePageView';
 import SquareBooking from './components/SquareBooking';
 import CoursesPageView from './components/CoursesPageView';
 import CoursesTeaser from './components/CoursesTeaser';
+import PromoDialog from './components/PromoDialog';
 import { COURSES_SLUG, coursesCopy } from './courses';
 import LangSwitch from './components/LangSwitch';
 import { asset, homePath, homeSection, photoSrcSet, servicePath } from './paths';
 import { localizedPages, type ServicePage } from './servicePages';
 import { useLang, useT } from './i18n';
 import { PolicyDetails, StudioDetails } from './components/StudioDialogs';
-import { DRAFT_KEY, faqsFor, readDraft, studio, studioHours, type AppointmentDraft } from './data';
+import { DRAFT_KEY, faqsFor, promo, readDraft, studio, studioHours, type AppointmentDraft } from './data';
 
 type OpenDialog =
   | { type: 'planner'; serviceId?: string }
   | { type: 'square' }
   | { type: 'policies'; tab: 'booking' | 'privacy' }
   | { type: 'studio' }
+  | { type: 'promo' }
   | null;
 
 function Botanical({ className = '' }: { className?: string }) {
@@ -63,6 +65,31 @@ export default function App({ page, courses = false }: { page?: ServicePage; cou
   const openPlanner = useCallback((serviceId?: string) => {
     showDialog({ type: 'planner', serviceId });
   }, [showDialog]);
+
+  // Black Friday pop-up: once per visit, a moment after the page loads, while the sale is on.
+  useEffect(() => {
+    const pageSlug = courses ? COURSES_SLUG : page?.slug;
+    if (Date.now() < Date.parse(promo.startsAt) || Date.now() >= Date.parse(promo.endsAt) || (pageSlug && promo.skip.includes(pageSlug))) return;
+    const key = `promo-seen:${promo.id}`;
+    try {
+      if (sessionStorage.getItem(key)) return;
+    } catch { /* storage blocked: still show it */ }
+    const timer = window.setTimeout(() => {
+      setDialog((current) => current ?? { type: 'promo' });
+      try { sessionStorage.setItem(key, '1'); } catch { /* ignore */ }
+    }, 900);
+    return () => window.clearTimeout(timer);
+  }, [courses, page?.slug]);
+
+  const bookFromPromo = useCallback(() => {
+    if (page?.squareBooking) {
+      setDialog({ type: 'square' });
+      return;
+    }
+    setDialog(null);
+    if (page) window.location.href = `${home}#services`;
+    else document.getElementById('services')?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+  }, [page, home, reduceMotion]);
 
   const deleteDraft = useCallback(() => {
     try {
@@ -297,6 +324,7 @@ export default function App({ page, courses = false }: { page?: ServicePage; cou
         {dialog?.type === 'square' && page?.squareBooking && <Dialog key="square" onClose={closeDialog} labelledBy="square-booking-title" className="square-dialog"><SquareBooking page={{ ...page, squareBooking: page.squareBooking }} /></Dialog>}
         {dialog?.type === 'planner' && <Dialog key="planner" onClose={closeDialog} labelledBy="planner-title" className="planner-dialog"><AppointmentPlanner initialService={dialog.serviceId} savedDraft={savedDraft} onSave={setSavedDraft} onDelete={deleteDraft} /></Dialog>}
         {dialog?.type === 'policies' && <Dialog key="policies" onClose={closeDialog} labelledBy="policies-title" className="info-dialog"><PolicyDetails initialTab={dialog.tab} hasDraft={Boolean(savedDraft)} onDelete={deleteDraft} /></Dialog>}
+        {dialog?.type === 'promo' && <Dialog key="promo" onClose={closeDialog} labelledBy="promo-title" className="promo-dialog"><PromoDialog onBook={bookFromPromo} onClose={closeDialog} /></Dialog>}
         {dialog?.type === 'studio' && <Dialog key="studio" onClose={closeDialog} labelledBy="studio-title" className="info-dialog"><StudioDetails onClose={closeDialog} /></Dialog>}
       </AnimatePresence>
     </>
